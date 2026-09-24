@@ -36,7 +36,7 @@ pool: "rotasyon-dışı — 13.00'da rekabetçi havuzdan çıktı (V26 Act 2'de 
 - **B Generator:** Site içindeki jeneratör köşesi; yükseklik ve off-angle verir.
 - **B Bench:** Site içindeki bank köşesi — savunucunun sık tuttuğu nokta.
 - **B Link:** Defender Spawn'ı B siteye bağlayan geçiş.
-- **B Tunnel:** Defender Spawn'ın altından geçen tünel — savunucunun en hızlı rotasyon hattı.
+- **B Tunnel:** Defender Spawn çıkışının altından geçip B siteye paralel uzanan yeraltı geçidi — B Main/B Tree tarafını B Arcade'e bağlar, B'nin girişlerinden biridir.
 - **B Site / B Default:** Plant alanı ve kutu arkası varsayılan plant noktası.
 
 ### Ortak

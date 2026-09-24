@@ -35,7 +35,9 @@
  * ## Bakım
  *
  * scripts/verify-kb.ts bu tablodaki her callout'un ilgili harita .md dosyasında
- * gerçekten geçtiğini doğrular — tablo KB'den sessizce sapamaz.
+ * gerçekten geçtiğini doğrular — tablo KB'den sessizce sapamaz ([N]). Ters yönü
+ * [N2] tutar: KB'nin kalın callout maddeleri ("- **X:**") kendi haritasında
+ * stripForeignCallouts'tan bayt-aynı geçmeli — KB tablodan sessizce sapamaz.
  */
 
 /** HER haritada bulunan evrensel konum adları.
@@ -53,15 +55,33 @@ export const UNIVERSAL_CALLOUTS: readonly string[] = [
   "t spawn",
 ];
 
-/** Harita slug'ı → o haritada GERÇEKTEN bulunan callout adları (küçük harf). */
+/** Harita slug'ı → o haritada GERÇEKTEN bulunan callout adları (küçük harf).
+ *
+ * KB ↔ TABLO SENKRONU (TR-KALAN-17 / B10, 2026-09-24): KB'nin kalın callout
+ * maddeleri ("- **B Tunnel:**") tabloda yoktu ama başka haritanın tablosunda
+ * KANITLIYDI → stripForeignCallouts'un cross-map kapısı modelin KB'den öğrenip
+ * yazdığı meşru adı siliyordu ("B Tunnel'da öldün." → "öldün."). Eklenenler ve
+ * doğrulama kaynağı (resmi = wiki.playvalorant.com/en-us/<Harita> harita etiketleri;
+ * metabot = metabot.gg/en/valorant/map/<Harita>/overview callout listesi):
+ *   • fracture "a main", "a link", "b link", "b tunnel" — resmi + metabot +
+ *     keengamer.com / theglobalgaming.com Fracture rehberleri
+ *   • ascent "a link" — resmi ("Each site has one door (A Link for A and Market
+ *     for B)") + redbull.com / dexerto.com ("down Mid Catwalk into A Link")
+ *   • bind "b link" — resmi + metabot
+ *   • haven "a tower" — resmi + metabot (A site etiketi; "A Heaven" resmi listede yok)
+ *   • abyss "a default", "b default" — harita etiketi DEĞİL, genel plant-noktası
+ *     terimi; bind/fracture/haven/icebox/lotus/pearl/split tablolarıyla aynı kural
+ * Breeze "A Cave" EKLENMEDİ: resmi v7.04 notu "A Cave blocked off", güncel resmi
+ * ve metabot listelerinde yok → KB maddesi (breeze.md) kaldırıldı.
+ * Masaüstü src-tauri/src/callouts.rs MAP_CALLOUTS aynı eklemeleri almalı (D22). */
 export const MAP_CALLOUTS: Record<string, readonly string[]> = {
-  abyss: ["a bridge", "a link", "a lobby", "a main", "a secret", "a security", "a site", "a tower", "a vent", "ascender", "attacker spawn", "b danger", "b link", "b lobby", "b main", "b nest", "b site", "b tower", "defender spawn", "mid", "mid bend", "mid bottom", "mid catwalk", "mid library", "mid top", "void"],
-  ascent: ["a lobby", "a main", "a short", "a site", "b lanes", "b link", "b lobby", "b main", "b site", "back b", "boathouse", "catwalk", "closet", "ct", "ct b", "cubby", "defender spawn b", "dice", "garden", "gen", "generator", "heaven", "hell", "market", "mid", "mid bottom", "mid courtyard", "mid link", "mid top", "pizza", "rafters", "switch", "top mid", "tree", "window", "wine"],
-  bind: ["a bath", "a default", "a heaven", "a hell", "a lamps", "a lobby", "a short", "a showers", "a site", "a tower", "arka bahçe", "b default", "b elbow", "b garden", "b hall", "b hookah", "b long", "b site", "b window", "bath", "elbow", "garden", "hall", "hamam", "heaven", "hell", "hookah", "lamps", "long", "short", "showers", "teleporter", "triple box", "window"],
+  abyss: ["a bridge", "a default", "a link", "a lobby", "a main", "a secret", "a security", "a site", "a tower", "a vent", "ascender", "attacker spawn", "b danger", "b default", "b link", "b lobby", "b main", "b nest", "b site", "b tower", "defender spawn", "mid", "mid bend", "mid bottom", "mid catwalk", "mid library", "mid top", "void"],
+  ascent: ["a link", "a lobby", "a main", "a short", "a site", "b lanes", "b link", "b lobby", "b main", "b site", "back b", "boathouse", "catwalk", "closet", "ct", "ct b", "cubby", "defender spawn b", "dice", "garden", "gen", "generator", "heaven", "hell", "market", "mid", "mid bottom", "mid courtyard", "mid link", "mid top", "pizza", "rafters", "switch", "top mid", "tree", "window", "wine"],
+  bind: ["a bath", "a default", "a heaven", "a hell", "a lamps", "a lobby", "a short", "a showers", "a site", "a tower", "arka bahçe", "b default", "b elbow", "b garden", "b hall", "b hookah", "b link", "b long", "b site", "b window", "bath", "elbow", "garden", "hall", "hamam", "heaven", "hell", "hookah", "lamps", "long", "short", "showers", "teleporter", "triple box", "window"],
   breeze: ["a main", "a pyramid", "a site", "attacker spawn", "b main", "b site", "b window", "chute", "cubby", "defender spawn", "doors", "elbow", "halls", "mid", "nest", "pyramid", "window"],
   corrode: ["a link", "a main", "a site", "b elbow", "b link", "b main", "b site", "bottom mid", "elbow", "mid", "mid window", "pocket", "stairs", "top mid", "tower", "yard"],
-  fracture: ["a default", "a dish", "a drop", "a hall", "a rope", "a site", "b arcade", "b canteen", "b default", "b generator", "b main", "b site", "b tower", "b tree", "ct spawn", "defender spawn", "mid", "zip line"],
-  haven: ["a default", "a heaven", "a hell", "a long", "a short", "a site", "b back", "b default", "b site", "c default", "c link", "c long", "c platform", "c site", "ct spawn", "garage", "mid", "mid doors", "mid window", "plat"],
+  fracture: ["a default", "a dish", "a drop", "a hall", "a link", "a main", "a rope", "a site", "b arcade", "b canteen", "b default", "b generator", "b link", "b main", "b site", "b tower", "b tree", "b tunnel", "ct spawn", "defender spawn", "mid", "zip line"],
+  haven: ["a default", "a heaven", "a hell", "a long", "a short", "a site", "a tower", "b back", "b default", "b site", "c default", "c link", "c long", "c platform", "c site", "ct spawn", "garage", "mid", "mid doors", "mid window", "plat"],
   // ⚠ AÇIK EKSİK — KB BOŞLUĞU (canlı-test #8, 2026-08-03): canlı maçta "mid boiler"
   // (log:1351) ve "b tube" (log:1377) 3/3 stratejiyle TEMİZ okundu, "mid blue" de
   // ölüm yeri oldu. Bileşik biçimleri bu tabloda YOK; yalnız çıplak "boiler"/"tube"/

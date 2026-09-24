@@ -12,6 +12,7 @@ import { loadVisionKnowledge, loadKnowledge, AGENT_ROLE_MAP, getAgentFile } from
 import { DEATH_TYPE_GUIDE } from "../lib/death-type";
 import { BANNED_PHRASES } from "../lib/ai-policy";
 import { MAP_CALLOUTS, UNIVERSAL_CALLOUTS } from "../lib/map-callouts";
+import { stripForeignCallouts } from "../lib/reality-checker";
 
 const KB = path.join(process.cwd(), "knowledge");
 let fail = 0, pass = 0;
@@ -290,7 +291,8 @@ console.log(`\n[11] ajan × aktif-havuz kapsam guard'ı`);
 // için kullanılıyor. Tablo KB'den sessizce SAPARSA iki yönde de zarar var:
 //   • Tabloda olup KB'de olmayan  → gerçekte var olmayan bir adı meşru sayarız
 //   • KB'de olup tabloda olmayan  → MEŞRU koçluk metnini bozarız (daha kötü)
-// Bu kontrol birincisini yakalar; ikincisi için tablo bilerek geniş tutuluyor.
+// Bu kontrol birincisini yakalar; ikincisinin KB'nin kalın callout maddeleri için
+// olan kısmını [N2] yakalar (TR-KALAN-17).
 console.log(`\n[N] Harita callout tablosu ↔ KB tutarlılığı`);
 {
   const mapFiles = fs.readdirSync(path.join(KB, "maps")).filter((f) => f.endsWith(".md"));
@@ -314,6 +316,54 @@ console.log(`\n[N] Harita callout tablosu ↔ KB tutarlılığı`);
       ghosts.length ? `(KB'de BULUNMAYAN: ${ghosts.join(", ")})` : "",
     );
   }
+}
+
+// N2) KB KALIN CALLOUT'LARI ↔ stripForeignCallouts (TR-KALAN-17 / B10, 2026-09-24)
+// [N] yalnız tablo→KB yönünü tutuyordu. Ters yönde üç kaynak (KB ↔ lib/map-callouts.ts
+// ↔ masaüstü callouts.rs) arasında hiçbir kontrol yoktu: KB'nin öğrettiği ad tabloda
+// yok ama BAŞKA haritanın tablosunda kanıtlıysa stripForeignCallouts'un cross-map
+// kapısı onu MEŞRU metinden siliyordu — fracture.md "- **B Tunnel:**" maddesinden
+// öğrenen model "B Tunnel'da öldün." yazıyor, kullanıcıya "öldün." gidiyordu (2026-07-24
+// "a hail" felaketinin aynı sınıfı). HEAD'de 10 ihlal: fracture A Main/A Link/B Link/
+// B Tunnel, ascent A Link, bind B Link, haven A Tower, abyss A Default/B Default,
+// breeze A Cave.
+// KURAL: knowledge/maps/<harita>.md'deki her kalın madde etiketi — "- **X:**" ve
+// "- **X**:" (13 dosyanın 6'sı yalnız ikinci biçimi kullanıyor) — "/" ya da "=" ile
+// ayrılmış eş adlar ayrı ayrı; çok-kelimeli her ad stripForeignCallouts(`${X}'da
+// öldün.`, harita)'dan BAYT-AYNI dönmeli. Tek kelime hiç silinmediği için atlanır.
+// KURTARMA YOLU (ihlalde): ad resmi/oyun-içi kaynakla doğrulanıyorsa o haritanın
+// lib/map-callouts.ts listesine eklenir (masaüstü callouts.rs aynı listeyi alır);
+// doğrulanamıyorsa KB maddesi çıkarılır ya da tablodaki doğru ada çevrilir. Harita
+// bilgisi UYDURULMAZ.
+console.log(`\n[N2] KB kalın callout etiketleri ↔ stripForeignCallouts (kendi haritasında silinmemeli)`);
+{
+  const LABEL_RE = /^\s*[-*]\s+\*\*([^*\n]+?)(?::\*\*|\*\*\s*:)/;
+  const mapFiles = fs.readdirSync(path.join(KB, "maps")).filter((f) => f.endsWith(".md"));
+  let total = 0;
+  const bad: string[] = [];
+  for (const f of mapFiles) {
+    const m = f.replace(".md", "");
+    const lines = fs.readFileSync(path.join(KB, "maps", f), "utf8").split(/\r?\n/);
+    lines.forEach((line, i) => {
+      const lm = LABEL_RE.exec(line);
+      if (!lm) return;
+      for (const part of lm[1].split(/\s*[/=]\s*/)) {
+        const name = part.trim();
+        if (!name.includes(" ")) continue;
+        total++;
+        const probe = `${name}'da öldün.`;
+        const got = stripForeignCallouts(probe, m);
+        if (got !== probe) bad.push(`${m}.md:${i + 1} "${name}" → "${got}"`);
+      }
+    });
+  }
+  check(
+    `KB'nin çok-kelimeli kalın etiketleri kendi haritasında korunuyor (${total - bad.length}/${total})`,
+    total > 0 && bad.length === 0,
+    bad.length
+      ? `\n     ${bad.join("\n     ")}\n     → doğrulanmışsa lib/map-callouts.ts'e ekle (+ masaüstü callouts.rs), doğrulanamıyorsa KB'den çıkar ya da tablodaki doğru ada çevir`
+      : total === 0 ? "(hiç etiket bulunamadı — LABEL_RE KB biçimiyle uyuşmuyor)" : "",
+  );
 }
 
 // ─────────────────────────────────────────────────────────────────────────────

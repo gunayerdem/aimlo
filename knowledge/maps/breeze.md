@@ -182,7 +182,6 @@ Rework'ün ilan edilmiş hedefi controller çeşitliliğini açmaktı — "Viper
 ## 7. Callout'lar & Pozisyon Rehberi
 - **A Main**: A'ya giden ana uzun hat. Duvar blokları alanı daralttı; açı hâlâ uzun — utility'siz çıkma.
 - **A Shop**: Rework'te A'nın bu tarafına açılan tek kapı. Cave girişi kapatıldı, Shop kapısı genişletildi — A'nın ikinci kolu artık buradan geçiyor. Dar ve tek hat: saldırıda içeri girmeden flash at, çünkü içeride siperin yok; savunmada site içinden ve Pyramid tarafından çapraz tut, kapının ağzına dikilme.
-- **A Cave**: Shop'un yanındaki eski giriş — geçiş kapatıldı ama alan duruyor. Kapalı olması boş olduğu anlamına gelmez: savunma orada dip köşe tutabilir, Shop'tan çıkarken bu köşeyi temizlemeden site'a yürüme.
 - **A Site**: Arka duvar uzatıldı; siper kutuları ve girinti plant/post-plant için korunak verir.
 - **A Pyramid**: Site içindeki piramit yapı — site içi siper; her round aynı yüzünde durma.
 - **Halls**: Eski A flank koridoru kapatıldı — bu rota artık oynanmıyor.

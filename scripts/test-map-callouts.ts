@@ -8,6 +8,7 @@
  *      bilinmeyen harita) BOZULMUYOR — softi'nin "çalışanı bozma" şartı
  */
 import { stripForeignCallouts } from "../lib/reality-checker";
+import { calloutBelongsToMap } from "../lib/map-callouts";
 
 let fail = 0;
 const t = (ad: string, kosul: boolean, detay = "") => {
@@ -85,8 +86,10 @@ t("boş metin", stripForeignCallouts("", "Lotus") === "");
 //    tablomda olmasa bile SİLİNMEMELİ ──
 console.log("\n[7] REGRESYON — masaüstünün ölçtüğü konum tabloda olmasa da korunur");
 {
-  // Fracture tablosunda 'a main' ve 'b link' YOK (KB'de geçmiyor). Ama masaüstü
-  // bunları ölçüp gönderdi → strip onları SİLMEMELİ.
+  // 2026-07-24'te Fracture tablosunda 'a main' ve 'b link' YOKTU; masaüstü bunları
+  // ölçüp gönderdi → strip onları SİLMEMELİ. (B10 ile ikisi de tabloya girdi —
+  // aşağıdaki iki iddia artık tablo yolundan da geçer; supplied yolunu hâlâ sınamak
+  // için 'a lobby' vakası eklendi: Fracture tablosunda YOK, başka haritada KANITLI.)
   const fr1 = "A Main'de utility'siz kaldın, düşman seni oradan avladı.";
   const d1 = stripForeignCallouts(fr1, "Fracture", "a main");
   t("Fracture 'A Main' (gönderilen konum) KORUNDU", /a main/i.test(d1), `→ "${d1}"`);
@@ -94,6 +97,11 @@ console.log("\n[7] REGRESYON — masaüstünün ölçtüğü konum tabloda olmas
   const fr2 = "B Link'te açıkta kaldın ve vuruldun.";
   const d2 = stripForeignCallouts(fr2, "Fracture", "b link");
   t("Fracture 'B Link' (gönderilen konum) KORUNDU", /b link/i.test(d2), `→ "${d2}"`);
+
+  const fr3 = "A Lobby'de açıkta kaldın ve vuruldun.";
+  t("kontrol: Fracture 'A Lobby' gönderilmezse siliniyor (tabloda yok)", !/a lobby/i.test(stripForeignCallouts(fr3, "Fracture")));
+  t("Fracture 'A Lobby' (gönderilen konum, tabloda YOK) KORUNDU", stripForeignCallouts(fr3, "Fracture", "a lobby") === fr3,
+    `→ "${stripForeignCallouts(fr3, "Fracture", "a lobby")}"`);
 }
 
 console.log("\n[8] Tek-kelimelik generic ('Tree') artık SİLİNMEZ (multi-word-only)");
@@ -154,6 +162,39 @@ console.log("\n[11] SİTE-HARFİ BESTESİ (TR-KALAN-17, 2026-09-23) — masaüst
   // Ölçülmüş konum her zaman meşru (masaüstü "b tree" gönderdiyse silinmez).
   const ms = "B Tree'de öldün.";
   t("gönderilen konum 'b tree' Ascent'te de KORUNUR", stripForeignCallouts(ms, "ascent", "b tree") === ms, `→ "${stripForeignCallouts(ms, "ascent", "b tree")}"`);
+}
+
+console.log("\n[12] KB ↔ TABLO SENKRONU (TR-KALAN-17 / B10) — KB'nin kalın callout'ları kendi haritasında silinmez");
+{
+  // HEAD (B10 öncesi): hepsi "öldün." — ad tabloda yoktu, başka haritada KANITLIYDI →
+  // cross-map kapısı siliyordu. Kaynaklar lib/map-callouts.ts MAP_CALLOUTS yorumunda.
+  const legit: [string, string][] = [
+    ["fracture", "A Main"], ["fracture", "A Link"], ["fracture", "B Link"], ["fracture", "B Tunnel"],
+    ["ascent", "A Link"], ["bind", "B Link"], ["haven", "A Tower"],
+    ["abyss", "A Default"], ["abyss", "B Default"],
+  ];
+  for (const [m, name] of legit) {
+    const s = `${name}'da öldün.`;
+    const d = stripForeignCallouts(s, m);
+    t(`${m} '${name}' KORUNDU`, d === s, `→ "${d}"`);
+    // Masaüstü sözleşmesi: [HARİTA İPUCU] kapısı (vision-prompt-builder) aynı tabloyu okur.
+    t(`calloutBelongsToMap('${name.toLowerCase()}', '${m}')`, calloutBelongsToMap(name.toLowerCase(), m));
+  }
+  // Canlı korpus (tr-cards r4-a, fracture): gönderilen konum OLMADAN da geçmiş round adı
+  // "R3 B Link)" artık öksüz "R3 )" bırakmıyor.
+  const r4 = "Son 3 round'da her round öldün (R1 A Hall, R2 B Generator, R3 B Link) — rakip farklı açılarda seni yakalıyor.";
+  t("fracture 'R3 B Link)' (supplied yok) KORUNDU", stripForeignCallouts(r4, "fracture") === r4, `→ "${stripForeignCallouts(r4, "fracture")}"`);
+  // Cross-map kapısı AÇILMADI: yeni adlar BAŞKA haritada hâlâ yabancı.
+  const neg: [string, string][] = [["lotus", "B Tunnel"], ["lotus", "A Tower"], ["sunset", "B Link"], ["ascent", "B Tunnel"]];
+  for (const [m, name] of neg) {
+    const d = stripForeignCallouts(`${name}'da öldün.`, m);
+    t(`${m} '${name}' (başka haritanın callout'u) hâlâ siliniyor`, !new RegExp(name, "i").test(d), `→ "${d}"`);
+  }
+  // Breeze "A Cave" BİLEREK eklenmedi (resmi v7.04: "A Cave blocked off"; güncel resmi +
+  // metabot listelerinde yok) → Summit'in callout'u olarak Breeze'de yabancı kalır.
+  const bc = stripForeignCallouts("A Cave'de öldün.", "breeze");
+  t("breeze 'A Cave' (kapatılmış alan, tabloda yok) siliniyor", !/a cave/i.test(bc), `→ "${bc}"`);
+  t("summit 'A Cave' (kendi callout'u) KORUNDU", stripForeignCallouts("A Cave'de öldün.", "summit") === "A Cave'de öldün.");
 }
 
 console.log(`\n══════ ${fail === 0 ? "✅ TÜMÜ GEÇTİ" : `❌ ${fail} BAŞARISIZ`} ══════\n`);
