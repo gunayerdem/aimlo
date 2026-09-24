@@ -14,14 +14,15 @@ import { createHmac } from "node:crypto";
 import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 
-// lib/billing → lib/supabase/server import-anında env doğrular; .env.local'ı yükle.
-try {
-  const envRaw = readFileSync(join(__dirname, "..", ".env.local"), "utf8");
-  for (const line of envRaw.split(/\r?\n/)) {
-    const m = line.match(/^([A-Z0-9_]+)=(.*)$/);
-    if (m && !process.env[m[1]]) process.env[m[1]] = m[2].trim();
-  }
-} catch { /* CI'da env zaten set olabilir */ }
+// lib/billing → lib/supabase/server import-anında env doğrular (server.ts:30-31 throw).
+// W3 followup #52 (W3-fix 2026-09-24): eskiden burada .env.local okunuyordu → temiz klonda
+// (ya da .env.local'siz CI/worktree'de) npm test bu betikte düşüyordu ve saf-fonksiyon testi
+// gereksiz yere gerçek sırları sürece yüklüyordu. test-api-contract / test-telemetry-route ile
+// AYNI kalıp: değerler kasten GEÇERSİZ (.invalid), test edilen fonksiyonların hiçbiri ağa çıkmaz;
+// ortamda gerçek değer varsa ||= ona dokunmaz.
+process.env.NEXT_PUBLIC_SUPABASE_URL ||= "https://billing-test.invalid";
+process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||= "billing-test-anon-key";
+process.env.SUPABASE_SERVICE_ROLE_KEY ||= "billing-test-service-key";
 
 let fail = 0;
 const eq = (name: string, got: unknown, want: unknown) => {
