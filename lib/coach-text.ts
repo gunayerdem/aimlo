@@ -1914,9 +1914,12 @@ export function finalizeCoachText(
     if (fb && meaningful(fb)) safe = fb;
   }
   if (!safe) return "";
-  const out = opts.clamp === "sentence"
-    ? clampToSentence(enforceAgentKit(safe, agent), cap)
-    : clampWords(enforceAgentKit(safe, agent), cap);
+  // Zincir tek ifadede kalır (scripts/test-pipeline-chain G1 grep-guard'ı bu dosyada
+  // kapak+kit iç içe çağrısını TEK tanım olarak arar). "sentence" kipinde
+  // clampWords sınırsız çağrılır (s.length <= Infinity → girdi AYNEN döner) ve kapağı
+  // clampToSentence uygular — "words" kipi bayt-aynı.
+  const kitted = clampWords(enforceAgentKit(safe, agent), opts.clamp === "sentence" ? Number.POSITIVE_INFINITY : cap);
+  const out = opts.clamp === "sentence" ? clampToSentence(kitted, cap) : kitted;
   return meaningful(out) ? out : "";
 }
 
