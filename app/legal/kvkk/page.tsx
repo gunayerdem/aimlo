@@ -78,7 +78,12 @@ export default function KvkkPage() {
                 görseli ne base64'ü DB'ye/storage'a yazar (saveMatchEvent /
                 saveAiUsage alanlarında görsel yok). Destek:
                 support_messages (user_id, email, message). Telemetri:
-                telemetry_events.user_hash = sha256(user.id) ilk 16 hane. */}
+                telemetry_events.user_hash = sha256(user.id) ilk 16 hane.
+                FB02 inceleme · F49: telemetri kullanım olaylarını da taşıyor —
+                lib/telemetry-types.ts app_open, login_ok, watch_started,
+                watch_stopped (sebep kodu), match_completed, watch_health
+                (round + skor + yakalama durumu); admin-telemetry countFunnel
+                bunları kullanıcı hunisi olarak okur. */}
             <li>
               Ekran görüntüsü: izleme sırasında alınan oyun karesi. Yalnızca
               öldüğünüz round&apos;da, anlık yapay zekâ analizi için
@@ -91,8 +96,11 @@ export default function KvkkPage() {
             </li>
             <li>
               Teknik telemetri: uygulamanın çalışma ölçümleri (süreler, hata
-              kodları, uygulama sürümü); kullanıcı kimliğiniz SHA-256 ile
-              özetlenerek saklanır
+              kodları, uygulama sürümü), kullanım olayları (uygulama açılışı,
+              giriş, izlemenin başlatılması/durdurulması ve sebebi, maç
+              tamamlanması) ve izleme sağlığı özetleri (round numarası, skor,
+              yakalama durumu); kullanıcı kimliğiniz SHA-256 ile özetlenerek
+              saklanır
             </li>
           </ul>
         </section>

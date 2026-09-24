@@ -37,7 +37,7 @@ ve `app/legal/privacy/page.tsx`'e işlendi:
 | 3 | Maç analizi: harita, ajan, taraf, round, skor, ölüm yeri, koç metni | Masaüstü uygulaması (ekrandan okunan değerler) | `analyses`, `player_memory`, `match_events` | `app/api/ai/vision/route.ts`, `app/api/ai/report/route.ts` |
 | 4 | Ekran görüntüsü (oyun karesi) | Masaüstü uygulaması | **Saklanmaz.** Yalnız `died !== false` iken OpenAI'ye gider | `app/api/ai/vision/route.ts` buildUserContent; route görseli DB'ye/storage'a yazmaz |
 | 5 | Destek mesajı + hesabın e-postası | Masaüstü Destek ekranı | `support_messages` + destek posta kutusuna bildirim e-postası (Resend) | `app/api/support/route.ts`, `lib/email.ts` sendSupportNotification |
-| 6 | Teknik telemetri (süre, hata kodu, sürüm) | Masaüstü uygulaması | `telemetry_events` — kimlik yalnız `sha256(user.id)` ilk 16 hane | `app/api/telemetry/route.ts` |
+| 6 | Teknik telemetri (süre, hata kodu, sürüm) + kullanım olayları (uygulama açılışı, giriş, izleme başlatma/durdurma + sebep, maç tamamlanması) + izleme sağlığı özeti (round, skor, yakalama durumu) | Masaüstü uygulaması | `telemetry_events` — kimlik yalnız `sha256(user.id)` ilk 16 hane | `app/api/telemetry/route.ts`, `lib/telemetry-types.ts`, `lib/admin-telemetry.ts` countFunnel |
 | 7 | Hız sınırı sayaçları: IP, e-posta/kullanıcı adı, kullanıcı kimliği | Her istek | Upstash Redis (pencere süresi kadar TTL) | `lib/api-auth.ts`, `lib/auth-rate-limit.ts` |
 | 8 | AI kullanım kaydı (token, gecikme) | Sunucu | `ai_usage` | `lib/ai-usage.ts` |
 | 9 | Sayfa görüntüleme / performans ölçümü | Tarayıcı | Vercel Analytics, Speed Insights | `app/layout.tsx` |
@@ -47,6 +47,18 @@ Not: `match_events` ve `ai_usage` tablolarında `user_id` `on delete set null`;
 hesap silinince satır kalır ama kimlik bağı kopar (supabase/0007, 0008).
 `support_messages` da set null; F50 (aynı paket) hesap silinmeden ÖNCE bu
 satırları service-role ile siliyor.
+
+**Geçmiş yetim destek satırları (FB02 inceleme · F50, softi onayı bekliyor):**
+F50 (1a38d1c) yalnız İLERİYE dönük. 0010 migration'ı (2026-06-30,
+`user_id … on delete set null`) ile F50 arasında silinen hesapların
+`support_messages` satırları `user_id = NULL` ama `email` + `message` DOLU
+kaldı; `lib/admin-analytics.ts` bunları `/admin/support`'ta e-postayla
+göstermeye devam ediyor. Silme sayfasının "mevcut veri tamamen silinir"
+vaadiyle çelişir. Sayı bilinmiyor (sıfır olabilir). Prod'da önce
+`select count(*) from support_messages where user_id is null;` — satır varsa
+tek seferlik silme ya da anonimleştirme (`email = null`,
+`message = '[kullanıcı silindi]'`) softi'nin kararı; ajan prod verisine
+dokunmaz.
 
 ## 2. Her amaç için aday hukuki sebep ve toplama yöntemi (md.10/1-d)
 
@@ -70,7 +82,7 @@ teyit edeceği aday sebepler (KVKK md.5/2):
 | Hesap verisi, analizler, oyuncu hafızası | Hesap silinene kadar; silmede CASCADE | Aynı + metne yazılsın |
 | OTP | 10 dakika | Aynı |
 | Ekran görüntüsü | AIMLO'da saklanmaz; OpenAI tarafı OpenAI'nin API politikası | OpenAI API saklama süresi hukukçuyla teyit edilsin |
-| Destek mesajları (DB) | F50 ile hesap silmede silinir | Çözümden sonra N ay (ör. 12) + hesap silmede hemen |
+| Destek mesajları (DB) | F50 ile hesap silmede silinir; F50 ÖNCESİ silinen hesapların satırları `user_id = NULL` ile e-posta + metin dolu kaldı (§1 notu, softi onayı bekliyor) | Çözümden sonra N ay (ör. 12) + hesap silmede hemen |
 | Destek bildirim e-postaları (posta kutusu) | Elle silinmedikçe kalır | Bkz. §7 |
 | Telemetri | Süresiz (TTL yok) | 90–180 gün |
 | `match_events`, `ai_usage` | Süresiz, hesap silinince kimliksizleşir | Süre belirlensin |

@@ -364,6 +364,23 @@ console.log("\n[7] F49 — KVKK/Gizlilik olgusal içerik koda göre");
   t("Gizlilik: OpenAI satırı ekran görüntüsü (yalnız ölünen round) + round verisi + AIMLO saklamaz",
     /OpenAI \(AI işleme — ekran görüntüsü \(yalnızca ölünen round'da\) \+ round verisi; AIMLO saklamaz\)/u.test(priv));
   t("Gizlilik: Upstash üçüncü taraf listesinde", /Upstash/.test(priv));
+  // FB02 inceleme · F49 (2026-09-25): telemetri kalemi yalnız "süreler, hata kodları,
+  // uygulama sürümü" diyordu; oysa lib/telemetry-types.ts app_open, login_ok,
+  // watch_started, watch_stopped (sebep kodu), match_completed ve watch_health (round +
+  // skor) olaylarını kabul ediyor, lib/admin-telemetry.ts countFunnel bunları kullanıcı
+  // hunisi olarak okuyor. Kilit: metin kullanım olaylarını söylüyor VE her olay tipi
+  // gerçekten kabul ediliyor (tip kaldırılırsa metin yeniden gözden geçirilsin).
+  const telKvkk = kvkk.slice(kvkk.indexOf("Teknik telemetri:"), kvkk.indexOf("Teknik telemetri:") + 400);
+  const telPriv = priv.slice(priv.indexOf("Teknik telemetri:"), priv.indexOf("Teknik telemetri:") + 300);
+  const USAGE_TR = [/kullanım olayları/u, /uygulama açılışı/u, /giriş/u, /başlatıl|başlatma/u, /durdurul|durdurma/u, /maç\s+tamamlanması/u, /round/u];
+  t("KVKK telemetri kalemi kullanım olaylarını + izleme sağlığını (round, skor) söyler",
+    USAGE_TR.every((re) => re.test(telKvkk)) && /sebebi/u.test(telKvkk) && /skor/u.test(telKvkk), telKvkk.slice(0, 200));
+  t("Gizlilik telemetri kalemi kullanım olaylarını söyler",
+    USAGE_TR.every((re) => re.test(telPriv)), telPriv.slice(0, 200));
+  const typesSrc = read("lib/telemetry-types.ts");
+  const acceptedList = typesSrc.slice(typesSrc.indexOf("export const TELEMETRY_EVENT_TYPES"));
+  t("metnin andığı olaylar backend'de gerçekten kabul ediliyor (app_open/login_ok/watch_started/watch_stopped/match_completed/watch_health)",
+    ["app_open", "login_ok", "watch_started", "watch_stopped", "match_completed", "watch_health"].every((k) => acceptedList.includes(`"${k}"`)));
 }
 
 // [8] Yakınsama Y08 (2026-09-25): landing SSS "Verilerim güvende mi?" cevabı

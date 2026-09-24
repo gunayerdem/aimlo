@@ -38,8 +38,10 @@ export default function PrivacyPage() {
             </li>
             <li>Destek mesajları: mesaj metni ve hesabın e-posta adresi</li>
             <li>
-              Teknik telemetri: süre ve hata ölçümleri; kullanıcı kimliği
-              SHA-256 ile özetlenir
+              Teknik telemetri: süre ve hata ölçümleri, kullanım olayları
+              (uygulama açılışı, giriş, izleme başlatma/durdurma, maç
+              tamamlanması) ve izleme sağlığı özetleri (round, skor);
+              kullanıcı kimliği SHA-256 ile özetlenir
             </li>
             <li>Oturum: IP adresi, tarayıcı, çerez bilgisi</li>
           </ul>
