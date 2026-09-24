@@ -1117,6 +1117,39 @@ console.log("\n════ FB05 inceleme · F14 tekrar/alışkanlık · lookbeh
   eq("149h açık 'Bu round B Main'de öldün' (sayım yok) → ölçülen konum",
     rc("Bu round B Main'de öldün; açıyı erken verdin."), "Bu round A Site'ta öldün; açıyı erken verdin.");
   eq("149i EN 'You died at B Main, so …' (sayım yok) → ölçülen konum", rc("You died at B Main, so change the angle.", "en"), "You died at A Site, so change the angle.");
+  // Yakınsama Y01/Y28 İNCELEME (2): dönem/sayım/tekrar işareti AÇIK bu-round çapasını ezmez. 4acb7c9 (HEAD)
+  // 154a-g'yi bayt-aynı bırakıyordu (bu round'un ölçülen A Site'ıyla ÇELİŞEN B Main gidiyordu); 25ac869
+  // PERIOD/COUNT vakalarında ölçülen konumu yazıp sahte "A Site'ta ikinci kez" birleşimi kuruyordu.
+  // Konum "o noktada"/"there" olur; sayım/dönem modelin kendi sözü (F57'nin işi).
+  for (const [ad, s, lang, want] of [
+    ["154a 'Bu round B Main'de ikinci kez öldün'", "Bu round B Main'de ikinci kez öldün; açıyı erken verdin.", "tr", "Bu round o noktada ikinci kez öldün; açıyı erken verdin."],
+    ["154b 'Bu round ikinci kez B Main'de öldün'", "Bu round ikinci kez B Main'de öldün.", "tr", "Bu round ikinci kez o noktada öldün."],
+    ["154c 'Bu round, ilk yarıdaki gibi …' (virgül aşan çapa)", "Bu round, ilk yarıdaki gibi B Main'de öldün.", "tr", "Bu round, ilk yarıdaki gibi o noktada öldün."],
+    ["154d 'Şimdi B Main'de üçüncü kez öldün'", "Şimdi B Main'de üçüncü kez öldün.", "tr", "Şimdi o noktada üçüncü kez öldün."],
+    ["154e 'Bu round yine B Main'de öldün' (tekrar)", "Bu round yine B Main'de öldün.", "tr", "Bu round yine o noktada öldün."],
+    ["154f EN 'This round you died at B Main for the second time'", "This round you died at B Main for the second time; you peeked too early.", "en", "This round you died there for the second time; you peeked too early."],
+    ["154g EN 'You died at B Main this round for the second time'", "You died at B Main this round for the second time.", "en", "You died there this round for the second time."],
+  ] as [string, string, "tr" | "en", string][]) eq(`${ad} → konum 'o noktada/there'`, rc(s, lang), want);
+  // Çapa callout'u YÖNETMİYORSA işaret korur (B Main hafızada R2/R4/R5): bitmiş yüklem ("verdin,"),
+  // zaman ayırıcı ("'dan önce"), sıfat-fiil yan-cümlesi ("öldüğün için"), EN "before this round".
+  for (const [ad, s, lang] of [
+    ["154h bitmiş yüklem arada", "Bu round açıyı erken verdin, B Main'de ikinci kez öldün.", "tr"],
+    ["154i zaman ayırıcı 'Bu round'dan önce'", "Bu round'dan önce B Main'de ikinci kez öldün.", "tr"],
+    ["154j sıfat-fiil 'Bu round, ilk yarıda … öldüğün için'", "Bu round, ilk yarıda B Main'de öldüğün için Market'ten gir.", "tr"],
+    ["154k EN 'Before this round …'", "Before this round you died at B Main for the second time.", "en"],
+  ] as [string, string, "tr" | "en"][]) same(`${ad} bayt-aynı`, rc(s, lang), s);
+  // Y01/Y28 İNCELEME (3): dönem/sayım muafiyeti yalnız hafızada ÖLÇÜLMÜŞ ad için. B Site m5'te hiç yok →
+  // HEAD bayt-aynı bırakıyordu (ölçülmemiş konum olgu diye gidiyordu); ölçülene de ÇEVRİLMEZ (Y28).
+  for (const [ad, s, lang, want] of [
+    ["155a 'Maçın başında B Site'ta öldün'", "Maçın başında B Site'ta öldün; bu round farklı açı al.", "tr", "Maçın başında o noktada öldün; bu round farklı açı al."],
+    ["155b 'B Site'ta üçüncü kez öldün'", "B Site'ta üçüncü kez öldün.", "tr", "O noktada üçüncü kez öldün."],
+    ["155c EN 'In the first half you died at B Site'", "In the first half you died at B Site.", "en", "In the first half you died there."],
+    ["155d EN 'That's the third time you died at B Site'", "That's the third time you died at B Site — you peeked without utility.", "en", "That's the third time you died there — you peeked without utility."],
+  ] as [string, string, "tr" | "en", string][]) eq(`${ad} (ölçülmemiş ad) → 'o noktada/there'`, rc(s, lang), want);
+  // Hafızadaki ad + dönem/sayım korunur (146/149 aynası, nested: 'Mid' ↔ hafızadaki 'mid bottom').
+  same("155e 'Maçın başında Mid'de öldün' (hafıza mid bottom) bayt-aynı",
+    rc("Maçın başında Mid'de öldün.", "tr", fgA, "Ascent", [...m5, { round_index: 6, died: true, death_position: "mid bottom", position_confidence: "high" }]),
+    "Maçın başında Mid'de öldün.");
   // (4) halkanın yazdığı ek / EN metin.
   eq("143a ölçülen 'market kapısı' → \"Market Kapısı'nda\" (HEAD: \"Kapısı'da\")",
     rc("Bu round B Main'de öldün.", "tr", { hasDeathLocation: true, deathLocation: "market kapısı" } as never), "Bu round Market Kapısı'nda öldün.");
@@ -1225,10 +1258,14 @@ console.log("\n════ FB06 · F57 · YAZIYLA SAYI + 'kere' + KONUM LİSTES
   const fgBM = { hasDeathLocation: true, deathLocation: "b main" } as never;
   const m5b: Mem[] = [1, 2, 3, 4, 5].map((i) => (i <= 2 ? { round_index: i, died: true, death_position: "b main", position_confidence: "high" } : { round_index: i, died: true }));
   for (const s of [
-    "Bu round bir kez daha A Main'de öldün; açıyı erken verdin.",
     "Bir kez daha A Main'de öldün, açıyı erken verdin.",
     "A Main'de bir kere daha öldün, açıyı erken verdin.",
   ]) same(`152 '${s.slice(0, 26)}…' yetim 'daha' üretmez (bayt-aynı)`, realityCheck(s, m5b as never, fgBM, "death", "tr", "Ascent").text, s);
+  // Y01/Y28 inceleme: açık "Bu round" çapası tekrar işaretini de yönetir → bu round'un ölçülen b main'iyle
+  // ÇELİŞEN A Main "o noktada"ya iner (eski kilit bu çelişkiyi bayt-aynı sabitliyordu); yetim "daha" yine yok.
+  eq("152 'Bu round bir kez daha A Main'de öldün' → 'o noktada', yetim 'daha' yok",
+    realityCheck("Bu round bir kez daha A Main'de öldün; açıyı erken verdin.", m5b as never, fgBM, "death", "tr", "Ascent").text,
+    "Bu round bir kez daha o noktada öldün; açıyı erken verdin.");
   // FB06 inceleme (low): bileşik yazıyla sayı "on iki" = 12 (HEAD: "iki kez" okunup 2 ≤ 5 "doğru").
   eq("153a 'Bu maçta on iki kez öldün' (toplam 5 ölüm) → '5 kez' (rakamlı '12 kez' ile aynı yol)",
     realityCheck("Bu maçta on iki kez öldün.", m5b as never, fgBM, "death", "tr", "Ascent").text, "Bu maçta 5 kez öldün.");

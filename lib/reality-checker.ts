@@ -3663,13 +3663,67 @@ function correctContradictedDeathLocation(
     while (ce < full.length && !/[.,!?;:—\n]/.test(full[ce])) ce++;
     return { cs, seg: full.slice(cs, ce) };
   };
-  /** Callout'un yan-cümlesi (virgül dahil sınır) geçmişe çapalı mı? */
-  const pastAnchored = (full: string, from: number, to: number) => {
+  // Yakınsama Y01/Y28 İNCELEME (2026-09-25). KANIT (prod zinciri buildVisionContext +
+  // finalizeVisionFeedback, gerçek M1-R10: hafıza R1/R7=b site, R3=a tree, R5=b main, R8=mid bottom;
+  // bu round ölçülen b lobby; 25ac869 ↔ 4acb7c9):
+  //  (2) dönem/sayım işareti yan-cümledeki AÇIK "bu round/şimdi" çapasını da eziyordu: "Bu round B
+  //      Main'de ikinci kez öldün" (base "…B Lobby'de…", HEAD "…B Main'de…"), "Bu round, ilk yarıdaki
+  //      gibi B Site'ta öldün", EN "This round you died at B Main for the second time" — bu round'un
+  //      ölçülenle ÇELİŞEN konumu aynen gidiyordu (aynı açık HABIT için base'de de vardı).
+  //  (3) dönem/sayım muafiyeti adın hafızada ÖLÇÜLMÜŞ olmasını istemiyordu: "Maçın başında A Site'ta
+  //      öldün" (A Site hiçbir round'da yok) aynen geçiyordu (Y04 muafiyeti history.has şartı arar).
+  // KURAL: açık geçmiş çapası (LOC_PAST / PAST_EXTRA) → eski yol ("past"). Tekrar/dönem/sayım işareti:
+  //  • açık bu-round çapası callout'u yönetiyorsa → konum "o noktada"/"there" (ölçülen konum + sayım
+  //    YAZILMAZ — Y28'in sahte sayım-konum birleşimi; modelin çelişen adı da kalmaz);
+  //  • yoksa tekrar/alışkanlık → dokunma (F14, değişmedi); dönem/sayım → ad hafızada ölçülmüşse
+  //    dokunma, değilse "o noktada"/"there" (ölçülene ÇEVRİLMEZ). Sayımın kendisi F57'nin işi.
+  const inHistory = (key: string): boolean => {
+    if (!historyRounds) return true;   // doğrudan çağıran (dizin yok): eski davranış
+    for (const v of historyRounds.values()) {
+      if (v === key || canonicalCalloutForMap(v, mk) === key || nested(key, v)) return true;
+    }
+    return false;
+  };
+  /** Açık "bu round / şimdi / az önce / this round" çapası bu callout'un ölüm yüklemini yönetiyor mu?
+   *  TR: cümle içinde (virgül aşılabilir) ölüm fiilinden ÖNCE, en yakın çapa; çapa ile callout arasında
+   *  zaman ayırıcı (önce/sonra, -mAdAn, -DIktAn, -IncA) ya da bitmiş bir yüklem ("…verdin, B Main'de …")
+   *  varsa yönetmez. EN: yalnız virgülle sınırlı yan-cümlede; "before/after/since/until this round"
+   *  yönetmez. */
+  const currentGoverns = (full: string, cStart: number, cEnd: number, verbStart: number, en: boolean): boolean => {
+    if (en) {
+      const { cs, seg } = clauseSeg(full, cStart, cEnd);
+      return [...seg.matchAll(LOC_CURRENT_ANCHOR_RE)].some((m) =>
+        !/(?<![\p{L}])(?:before|after|since|until)\s+$/iu.test(full.slice(0, cs + (m.index ?? 0))));
+    }
+    let ss = cStart;
+    while (ss > 0 && !/[.!?;:—\n]/.test(full[ss - 1])) ss--;
+    const marks = [...full.slice(ss, verbStart).matchAll(LOC_CURRENT_ANCHOR_RE)]
+      .map((m) => ({ at: ss + (m.index ?? 0), end: ss + (m.index ?? 0) + m[0].length }));
+    const pick = marks.filter((x) => x.end <= cStart).sort((a, b) => b.at - a.at)[0]
+      ?? marks.filter((x) => x.at >= cEnd).sort((a, b) => a.at - b.at)[0];
+    if (!pick) return false;
+    const between = pick.end <= cStart ? full.slice(pick.end, cStart) : full.slice(cEnd, pick.at);
+    return !between.split(/\s+/).some((w0) => {
+      const w = w0.toLocaleLowerCase("tr").replace(/[^\p{L}]/gu, "");
+      return !!w && (TIME_SEPARATOR_WORD_RE.test(w) || (INDICATIVE_FINAL_RE.test(w) && !PAST_WORD_STOP.has(w)));
+    });
+  };
+  /** Callout'un yan-cümlesinin (virgül dahil sınır) zaman sınıfı: "past" (açık geçmiş çapası — eski
+   *  yol + Y09 round doğrulaması), "keep" (dokunma), "neutral" (konum "o noktada"/"there"), null (bu
+   *  round'un iddiası → ölçülen konuma düzelt). `finite`: TR "öldüğün…" sıfat-fiili bir yan-cümledir
+   *  ("…öldüğün için bu round …") → bu-round çapası onu yönetmez. */
+  const clauseTime = (
+    key: string, full: string, from: number, to: number, cStart: number, cEnd: number, verbStart: number,
+    finite: boolean, en: boolean,
+  ): "past" | "keep" | "neutral" | null => {
     const { seg } = clauseSeg(full, from, to);
-    return new RegExp(LOC_PAST_ANCHOR_RE.source, "iu").test(seg) || DEATH_BIND_PAST_EXTRA_RE.test(seg)
-      || DEATH_BIND_HABIT_RE.test(seg)                      // FB05 inceleme · F14: tekrar/alışkanlık
-      || DEATH_BIND_PERIOD_RE.test(seg)                     // Y01: maç dönemi (ilk yarı, maçın başı…)
-      || DEATH_BIND_COUNT_RE.test(seg);                     // Y28: sayım/sıra (üçüncü kez, three times…)
+    if (new RegExp(LOC_PAST_ANCHOR_RE.source, "iu").test(seg) || DEATH_BIND_PAST_EXTRA_RE.test(seg)) return "past";
+    const habit = DEATH_BIND_HABIT_RE.test(seg);                // FB05 inceleme · F14: tekrar/alışkanlık
+    if (!habit && !DEATH_BIND_PERIOD_RE.test(seg)               // Y01: maç dönemi (ilk yarı, maçın başı…)
+      && !DEATH_BIND_COUNT_RE.test(seg)) return null;           // Y28: sayım/sıra (üçüncü kez, three times…)
+    if (finite && currentGoverns(full, cStart, cEnd, verbStart, en)) return "neutral";   // inceleme (2)
+    if (habit) return "keep";
+    return inHistory(key) ? "keep" : "neutral";                                          // inceleme (3)
   };
   // Yakınsama Y09 (2026-09-24): SAYISAL round çapası ("R3", "round 3", "3. round") o round'un
   // ÖLÇÜLMÜŞ kaydıyla doğrulanır (F83 historyMatchesAnchor'un ölçülmüş-yol aynası). KANIT (prod
@@ -3710,9 +3764,17 @@ function correctContradictedDeathLocation(
       const numFrag = /^\s+\d+\s*,/.test(mid);
       // Fiilsiz "<sayı>," parçasında çapa yalnız callout'un KENDİ parçasında aranır.
       const fragComma = numFrag ? offset + name.length + _suf.length + mid.indexOf(",") : offset + whole.length;
-      if (pastAnchored(full, offset, fragComma)) {
+      const key = name.trim().toLowerCase().replace(/\s+/g, " ");
+      const verbStart = offset + whole.length - verb.length;
+      const time = clauseTime(key, full, offset, fragComma, offset, offset + name.length, verbStart, !/^öldüğün/iu.test(verb), false);
+      if (time === "keep" || (time === "neutral" && numFrag)) return whole;
+      if (time === "neutral") {   // Y01/Y28 inceleme: konum "o noktada"; sayım/dönem/tekrar modelin kendi sözü
+        const atStartN = offset === 0 || /[.!?]\s+$/.test(full.slice(0, offset));
+        return (atStartN ? "O noktada" : "o noktada") + mid + verb;
+      }
+      if (time === "past") {
         // Y09: sayısal round çapası o round'un kaydıyla çelişiyorsa konum düşer, çapa + fiil kalır.
-        if (numFrag || !numericPastMismatch(name.trim().toLowerCase().replace(/\s+/g, " "), full, offset, offset + whole.length)) return whole;
+        if (numFrag || !numericPastMismatch(key, full, offset, offset + whole.length)) return whole;
         const rest = mid.replace(/^\s+/, "") + verb;
         const atStart0 = offset === 0 || /[.!?]\s+$/.test(full.slice(0, offset));
         return atStart0 ? rest.charAt(0).toLocaleUpperCase("tr-TR") + rest.slice(1) : rest;
@@ -3737,9 +3799,13 @@ function correctContradictedDeathLocation(
       if (!/^\p{Lu}/u.test(name)) return whole;                  // EN'de çıplak küçük ad gündelik kelime
       const at = offset + whole.length - name.length;
       if (!eligible(name, at, full)) return whole;
-      if (pastAnchored(full, offset, offset + whole.length)) {
+      const key = name.trim().toLowerCase().replace(/\s+/g, " ");
+      const time = clauseTime(key, full, offset, offset + whole.length, at, offset + whole.length, at, true, true);
+      if (time === "keep") return whole;
+      if (time === "neutral") return `${verb} there`;   // Y01/Y28 inceleme (TR "o noktada" aynası)
+      if (time === "past") {
         // Y09: "You died at B Site in R3" (R3 = a tree) → "You died in R3" (117c ile simetrik).
-        return numericPastMismatch(name.trim().toLowerCase().replace(/\s+/g, " "), full, offset, offset + whole.length) ? verb : whole;
+        return numericPastMismatch(key, full, offset, offset + whole.length) ? verb : whole;
       }
       // FB05 inceleme (low): Türkçe harfli kanonik ad ("Market Kapısı") EN metne yazılmaz.
       return canonical && !TR_SPECIFIC_CHAR_RE.test(measured) ? `${verb} ${prep} ${calloutDisplay(measured)}` : `${verb} there`;

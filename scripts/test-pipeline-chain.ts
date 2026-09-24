@@ -728,12 +728,30 @@ console.log("\n[Y01/Y03/Y09] F14 halkası: geçmiş dönem korunur, ham TR konum
       "R3'te B Site'ta öldün; bu round B Lobby'de açıyı geniş tuttun.",
       "R3'te öldün; bu round B Lobby'de açıyı geniş tuttun."],
     // Yakınsama Y28: sayım/sıra cümlesi bu round'un konum iddiası değil (HEAD: ölçülen 'B Lobby' yazılıyordu).
-    ["Y28 TR DA 'B Main'de ikinci kez öldün' (R5 = b main) korunur", "M1-R10-ascent-jett", {}, "tr",
-      "B Main'de ikinci kez öldün; bu round B Lobby'de açıyı geniş tuttun.",
-      "B Main'de ikinci kez öldün; bu round B Lobby'de açıyı geniş tuttun."],
-    ["Y28 EN DA 'That's the second time you died at B Main' korunur", "M1-R10-ascent-jett", {}, "en",
-      "That's the second time you died at B Main — this round you held B Lobby too wide.",
-      "That's the second time you died at B Main — this round you held B Lobby too wide."],
+    // Y01/Y28 İNCELEME: fikstür DOĞRU olguyla — M1-R10'da B Site R1 + R7 (ikinci B Site ölümü R7). Eski
+    // fikstür "B Main'de ikinci kez" hafızada tek B Main (R5) varken yanlış bir olguyu "korunur" diye
+    // kilitliyordu (sıra sayısını F57 doğrulamıyor — bilinen sınır, bu kilidin konusu değil).
+    ["Y28 TR DA 'B Site'ta ikinci kez öldün' (R1 + R7 = b site) korunur", "M1-R10-ascent-jett", {}, "tr",
+      "B Site'ta ikinci kez öldün; bu round B Lobby'de açıyı geniş tuttun.",
+      "B Site'ta ikinci kez öldün; bu round B Lobby'de açıyı geniş tuttun."],
+    ["Y28 EN DA 'That's the second time you died at B Site' korunur", "M1-R10-ascent-jett", {}, "en",
+      "That's the second time you died at B Site — this round you held B Lobby too wide.",
+      "That's the second time you died at B Site — this round you held B Lobby too wide."],
+    // Y01/Y28 İNCELEME (2): açık bu-round çapası dönem/sayım işaretinden güçlü. 4acb7c9: üçü de AYNEN
+    // (ölçülen b lobby ile çelişen B Main/B Site gidiyordu); 25ac869 ölçüleni yazıp sahte birleşim kuruyordu.
+    ["Y28 inceleme TR 'Bu round B Main'de ikinci kez öldün' → 'o noktada'", "M1-R10-ascent-jett", {}, "tr",
+      "Bu round B Main'de ikinci kez öldün; açıyı erken verdin.",
+      "Bu round o noktada ikinci kez öldün; açıyı erken verdin."],
+    ["Y01 inceleme TR 'Bu round, ilk yarıdaki gibi B Site'ta öldün' → 'o noktada'", "M1-R10-ascent-jett", {}, "tr",
+      "Bu round, ilk yarıdaki gibi B Site'ta öldün; açıyı erken verdin.",
+      "Bu round, ilk yarıdaki gibi o noktada öldün; açıyı erken verdin."],
+    ["Y28 inceleme EN 'This round you died at B Main for the second time' → 'there'", "M1-R10-ascent-jett", {}, "en",
+      "This round you died at B Main for the second time; you peeked too early.",
+      "This round you died there for the second time; you peeked too early."],
+    // Y01/Y28 İNCELEME (3): hiç ölçülmemiş ad (A Site) dönem çapasıyla korunmaz, ölçülene de çevrilmez.
+    ["Y01 inceleme TR 'Maçın başında A Site'ta öldün' (A Site ölçülmedi) → 'o noktada'", "M1-R10-ascent-jett", {}, "tr",
+      "Maçın başında A Site'ta öldün; bu round B Lobby'de açıyı geniş tuttun.",
+      "Maçın başında o noktada öldün; bu round B Lobby'de açıyı geniş tuttun."],
   ];
   for (const [ad, id, mutate, lang, raw, want] of cases) {
     const b = { ...real.find((x) => x.id === id)!.body, ...mutate } as VisionPromptBody;
