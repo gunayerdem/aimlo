@@ -126,6 +126,11 @@ export interface FactGround {
   // Vision route TEK round → string; report route TÜM round'ların konumları → string[]
   // (rapor ÖZETİ birçok round'un konumuna atıfta bulunur; hepsi korunmalı).
   deathLocation?: string | string[];
+  // FB07 · F92: maçta ÖLÇÜLMÜŞ katil silahı adları (sözlük-bağlı, küçük harf). hasWeapon=false
+  // kolu bunları silmez (rapor prompt'u modele "killedBy=<ajan>/<silah>" veriyor; model doğru
+  // yazdığında silinmesin). Yalnız rapor buildReportCleaner doldurur; vision'da verilmez →
+  // bayt-aynı. Maç düzeyi tek bir "anyWeapon" bayrağı YOK (ölçülmemiş silahı da açardı).
+  suppliedWeapons?: string[];
   // TR-KALAN-16 (2026-09-23) + B02 İNCELEME: BU round'un ölçülmüş konum(lar)ı
   // (deathLocation; düz toLowerCase) — guardUnprovenFacts'in konum-yokken döngüsü
   // bunlara KOŞULSUZ dokunmaz. realityCheck kendisi doldurur. İlk sürüm buraya
@@ -2000,8 +2005,14 @@ export function guardUnprovenFacts(
   // hasWeapon=true iken (killerInfo silahı içeriyor) DOKUNMA. 'aldı' fiil-listesinde
   // DEĞİL (çift-anlam: öldürdü/satın-aldı). Fiilden SONRA NL sınırı → 'vurdun/öldürdün'
   // gibi ekli formlar kısmi eşleşmesin.
-  if (factGround.hasWeapon === false) {
-    const WALT = WEAPON_NAMES.map(escapeRe).sort((a, b) => b.length - a.length).join("|");
+  // FB07 · F92: ölçülmüş silah adları (suppliedWeapons) WALT'tan ÇIKARILIR — rapor yolunda
+  // modelin doğru yazdığı "Operator" silinmez; ölçülmemiş silah eskisi gibi silinir. Liste
+  // boşsa (vision) WALT eskisiyle aynı; hepsi ölçülmüşse kol hiç çalışmaz (boş alternasyon
+  // her yeri eşlerdi).
+  const suppliedW = new Set((factGround.suppliedWeapons ?? []).map((w) => w.toLowerCase()));
+  const WALT_NAMES = WEAPON_NAMES.filter((w) => !suppliedW.has(w));
+  if (factGround.hasWeapon === false && WALT_NAMES.length > 0) {
+    const WALT = WALT_NAMES.map(escapeRe).sort((a, b) => b.length - a.length).join("|");
     const NLB = "(?<![a-zçğıöşüâîû])", NL = "(?![a-zçğıöşüâîû])";
     // FB07 · F43: hedge'li (-miş) biçimler de ("seni Operator ile vurmuş olabilir").
     const WKV = "(öldürdü|öldürdün|vurdu|vurdun|kesti|düşürdü|indirdi|biçti|öldürmüş|vurmuş|kesmiş)";

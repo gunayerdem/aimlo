@@ -326,5 +326,36 @@ console.log("\n[F53] katil bilinmezken yaygın katil kalıpları nötrleniyor (D
     `→ ${JSON.stringify(fin.enemyAnalysis)}`);
 }
 
+// ── FB07 · F92: rapor yolunda ÖLÇÜLMÜŞ katil silahı silinmez ───────────────────────
+// Rapor prompt'u modele "killedBy=jett/operator" veriyor; fg hasWeapon maç düzeyinde false
+// olduğu için guard modelin DOĞRU yazdığı silahı siliyordu (report-samples ER1 mistake:
+// "Jett killed you with an Operator" → "Jett killed you"). Fix olmadan iki "korunur" vakası kırılır.
+console.log("\n[F92] rapor: ölçülmüş silah korunur, ölçülmemiş silah silinir; vision bayt-aynı");
+{
+  const cleanerW = (lang: "tr" | "en") => {
+    const v = validateRequest({
+      rounds: [
+        { round: 1, score: "0 - 1", result: "loss", died: true, killerInfo: "killed by jett with operator", deathLocation: "B Main" },
+        { round: 2, score: "0 - 2", result: "loss", died: true, killerInfo: "killed by jett with blade", deathLocation: "B Main" },
+      ],
+      lang, map: "ascent", agent: "cypher",
+    });
+    if (!v.valid) throw new Error("fixture geçersiz");
+    return buildReportCleaner(v.data);
+  };
+  const tr = cleanerW("tr"), en = cleanerW("en");
+  const t1 = "R1'de B Main'de Jett seni Operator ile öldürdü; aynı açıyı tekrar tutma.";
+  t("F92 TR ölçülmüş 'Operator ile' korunur", tr(t1, 1000, "YEDEK") === t1, `→ "${tr(t1, 1000, "YEDEK")}"`);
+  const t2 = tr("R2'de Jett seni Spectre ile öldürdü; aynı açıyı tekrar tutma.", 1000, "YEDEK");
+  t("F92 TR ölçülmemiş 'Spectre ile' silinir", t2 === "R2'de Jett seni öldürdü; aynı açıyı tekrar tutma.", `→ "${t2}"`);
+  const e1 = "In R1 Jett killed you with an Operator at B Main; don't re-hold that angle.";
+  t("F92 EN ölçülmüş 'with an Operator' korunur", en(e1, 1000, "YEDEK") === e1, `→ "${en(e1, 1000, "YEDEK")}"`);
+  const e2 = en("In R2 Jett killed you with a Spectre at B Main; don't re-hold that angle.", 1000, "YEDEK");
+  t("F92 EN ölçülmemiş 'with a Spectre' silinir", e2 === "In R2 Jett killed you at B Main; don't re-hold that angle.", `→ "${e2}"`);
+  // Vision yolu: suppliedWeapons verilmez → ölçülmemiş silah eskisi gibi silinir (bayt-aynı davranış).
+  const vis = realityCheck("Jett killed you with an Operator from long range.", [] as never, { hasWeapon: false } as never, "death", "en").text;
+  t("F92 vision (suppliedWeapons yok) eskisi gibi siler", vis === "Jett killed you from long range.", `→ "${vis}"`);
+}
+
 console.log(`\n${fail === 0 ? "TÜM TESTLER GEÇTİ ✓" : `${fail} TEST BAŞARISIZ ✗`}`);
 process.exit(fail ? 1 : 0);

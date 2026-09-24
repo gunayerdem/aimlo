@@ -34,6 +34,8 @@ import { buildPolicyBlock } from "@/lib/ai-policy";
 import { cleanCoachText, stripNumericHp, finalizeCoachText, trLocative } from "@/lib/coach-text";
 import { formatMap, formatAgent, formatMode, normalizeSide, knownAgent } from "@/lib/format-display";
 import { realityCheck, buildFactGround, type FactGround } from "@/lib/reality-checker";
+// FB07 · F92: ölçülmüş katil silahı sözlük-bağlı (reality-checker ile aynı kaynak).
+import { extractKillerWeapon } from "@/lib/comp-weapon";
 import { VISION_ENEMY_ITEM_CAP } from "@/lib/vision-postprocess";
 import { isUuidV4 } from "@/lib/uuid";
 import { pickReportScore, sanitizeReportInput } from "@/lib/report-score";
@@ -942,7 +944,14 @@ export function buildReportCleaner(
   //   hasDeathLocation= ANY round read a deathLocation (denetim fix #2: blanket-false
   //                     would kill legit "A Site'te sürekli öldün" coaching; blanket-
   //                     true would let "A Dish'te öldün" fabrication through. Derive it.)
-  // hasWeapon stays false (report has no enemy weapon string in the AI text path);
+  // hasWeapon maç düzeyinde false KALIR — ama rapor prompt'u round satırlarında ölçülmüş
+  // katil silahını modele VERİYOR ("killedBy=<ajan>/<silah>", buildReportPrompts). FB07 ·
+  // F92: eski yorum ("report has no enemy weapon string in the AI text path") yanlıştı ve
+  // guard modelin DOĞRU yazdığı silahı siliyordu ("Jett seni Operator ile öldürdü" →
+  // "Jett seni öldürdü"; EN 70d3ca1'den beri de). Maçta ölçülmüş silah ADLARI (sözlük-bağlı,
+  // küçük harf) suppliedWeapons ile verilir → guard yalnız ölçülmemiş silahı siler.
+  // Maç düzeyinde tek bir "anyWeapon" bayrağı BİLİNÇLİ kullanılmadı: o, ölçülmemiş silah
+  // uydurmasını da açardı.
   // hasRoute/hasTradeData false (not measured/sent at match-report time).
   const anyKiller = rounds.some(
     (r) => typeof r.killerAgent === "string" && r.killerAgent.length > 0,
@@ -977,6 +986,15 @@ export function buildReportCleaner(
     // ile AYNI: resmî tablo (knownAgent) — "Unknown"/boş/tanınmayan → undefined
     // (muafiyet yok). Yalnız STEP2 muafiyeti okur (reality-checker playerAgent).
     playerAgent: knownAgent(body.setup?.agent),
+    // FB07 · F92: maçta ölçülmüş katil silahları — yalnız sözlükte olanlar
+    // (extractKillerWeapon: "blade"/OCR gürültüsü null döner), küçük harf.
+    suppliedWeapons: [
+      ...new Set(
+        rounds
+          .map((r) => (typeof r.killerWeapon === "string" ? extractKillerWeapon(r.killerWeapon)?.name : undefined))
+          .filter((w): w is string => typeof w === "string" && w.length > 0),
+      ),
+    ],
   };
   // ── B82 (2026-07-31): TEK TEMİZLEYİCİ ZİNCİR ────────────────────────
   // NEDEN: aynı çıktı guard'ları 4 route'ta 4 FARKLI derinlikte elle
