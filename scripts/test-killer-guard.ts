@@ -324,6 +324,30 @@ console.log("\n[F53] katil bilinmezken yaygın katil kalıpları nötrleniyor (D
   t("F53 zincir EA: 'Cypher was the killer' → 'An enemy was the killer'",
     fin.enemyAnalysis[0] === "An enemy was the killer at Hookah and used the map's elevated angle to punish wide swings.",
     `→ ${JSON.stringify(fin.enemyAnalysis)}`);
+
+  // FB07 inceleme · F53 (medium): "got you"/"yakaladı"nın öldürme DIŞI anlamları + müttefik/oyuncu
+  // işaretçisi. HEAD: "As an enemy, your dash…", "Your an enemy got you info…", "Waiting for an enemy
+  // to recon…", "Takım arkadaşın bir düşman oku attı…". Oyuncu Jett, katil okunmamış.
+  const fgJ = { ...buildFactGround({ died: true }, {}), playerAgentKnown: true, playerAgent: "Jett" } as never;
+  for (const [s, lang] of [
+    ["As Jett, your dash got you onto site before your team could trade.", "en"],
+    ["Your Sova got you info on B before you pushed.", "en"],
+    ["Waiting for Sova to recon got you nothing; push with the team.", "en"],
+    ["Takım arkadaşın Sova oku attı ve düşmanı yakaladı, sen takip etmedin.", "tr"],
+  ] as [string, "tr" | "en"][]) {
+    const out = realityCheck(s, [] as never, fgJ, "death", lang).text;
+    t(`F53b müttefik/oyuncu/öldürme-dışı bayt-aynı: "${s.slice(0, 44)}…"`, out === s, `→ "${out}"`);
+  }
+  for (const [s, lang, want] of [
+    ["Cypher got you from Heaven.", "en", "An enemy got you from Heaven."],
+    ["Bu round düşman Jett seni orada yakaladı.", "tr", "Bu round bir düşman seni orada yakaladı."],
+  ] as [string, "tr" | "en", string][]) {
+    const out = realityCheck(s, [] as never, fgJ, "death", lang).text;
+    t(`F53b gerçek katil kalıbı hâlâ nötr: "${s}"`, out === want, `→ "${out}"`);
+  }
+  // FB07 inceleme · F44 (low): "Rakibin Jett'i seni vurdu" → eskiden "Bir düşmanı seni vurdu".
+  const r44 = realityCheck("Rakibin Jett'i seni vurdu.", [] as never, fgJ, "death", "tr").text;
+  t("F44b 'Rakibin Jett'i seni vurdu.' → 'Bir düşman seni vurdu.' (iyelik eki artığı yok)", r44 === "Bir düşman seni vurdu.", `→ "${r44}"`);
 }
 
 // ── FB07 · F92: rapor yolunda ÖLÇÜLMÜŞ katil silahı silinmez ───────────────────────

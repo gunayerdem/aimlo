@@ -1897,12 +1897,19 @@ function tidyHpStripResidue(t: string, lang: "tr" | "en"): string {
 // kimliği realityCheck'te (KV2 artık -miş biçimleri de tanır) "bir düşman"a iner →
 // eski kesinleştirme ("vurdu") sürer.
 // 2. şahıs ("olabilirsin") bu kurala girmez → TR_JARGON'daki şahıs-koruyan kural.
-const HEDGE3_SRC = "(?<![\\p{L}])[\\p{L}]*m[ıiuü]ş\\s+olabilir(?:ler)?(?![\\p{L}])";
+// FB07 inceleme · F43 (medium): "-yor olabilir" ve İSİM yüklemi + "olabilir" de hedge ("Cypher
+// Heaven hattını bekliyor olabilir" → eskiden "…bekliyor"; "Cypher … tuzak ve kamera olabilir" →
+// "…tuzak ve kamera"). Korpus ham TR: 15 "-yor olabilir" + 2 isim+olabilir (32 "-miş" yanında).
+// Yine YALNIZ düşman öznesi taşıyan cümlede (HEDGE_ENEMY_SUBJ_RE) — düşman-dışı " olabilir"
+// TR_JARGON'da eskisi gibi.
+const HEDGE3_SRC = "(?<![\\p{L}])[\\p{L}]+\\s+olabilir(?:ler)?(?![\\p{L}])";
 const HEDGE3_RE = new RegExp(HEDGE3_SRC, "iu");
 const HEDGE_ENEMY_SUBJ_RE = new RegExp(
   `(?<![\\p{L}])(?:${AGENT_ALT_CT}|Kayo|düşman|rakip|rakib)(?:['’]?[\\p{L}]{0,6})?(?![\\p{L}])(?!\\s+olarak(?![\\p{L}]))`,
   "iu",
 );
+/** Düşen yan-cümleye gönderme yapan gösterme ("o açıya", "oraya") — öncülü düşünce ASILI kalır. */
+const HEDGE_DANGLING_DEMONSTRATIVE_RE = /(?<![\p{L}])(?:o\s+(?:[\p{L}]+\s+)?(?:açı|hat|köşe|nokta|pozisyon|bölge|yol)[\p{L}]*|oraya|orada|oradan|orayı)(?![\p{L}])/iu;
 const HEDGE_DEATH_CORE_RE = /(?<![\p{L}])seni(?![\p{L}])[^.!?\n]{0,60}?(?:öldürmüş|vurmuş|kesmiş|düşürmüş|indirmiş|biçmiş|avlamış|devirmiş)\s+olabilir(?:ler)?(?![\p{L}])/iu;
 // Bağlaçtan bölmek için sol yan-cümlenin çekimli yüklemle bitmesi şartı.
 const TR_FINITE_END_RE = /(?:[dt][ıiuü](?:n|m|k|nız|niz|nuz|nüz|lar|ler)?|m[ıiuü]ş(?:s[ıiuü]n|t[ıiuü]r|lar|ler)?|yor(?:du|dun|sun|lar)?|olabilir(?:ler)?|(?<![\p{L}])(?:var|yok))$/iu;
@@ -1954,6 +1961,17 @@ function scanHedgedEnemyClaims(t: string): HedgeScan {
     if (chunks[0] !== kept[0] && !SELF_CONTAINED_RE.test(kept.map((c) => c.text).join(" "))) {
       out.push(s); fully.push(true); continue;
     }
+    // FB07 inceleme (low): düşen yan-cümleden SONRA gelen kalan parçada ona gönderme yapan gösterme
+    // varsa ("…op açısı <hedge>, Cypher kadrosunda, o açıya direct bakıyordu") parça öncülsüz →
+    // cümle bütün hedge'li. Düşen yan-cümleden ÖNCEKİ parçanın kendi göstermesine dokunulmaz.
+    const firstDropped = chunks.findIndex((c) => !kept.includes(c));
+    const afterDrop = kept.filter((c) => chunks.indexOf(c) > firstDropped);
+    if (afterDrop.length > 0 && HEDGE_DANGLING_DEMONSTRATIVE_RE.test(afterDrop.map((c) => c.text).join(" "))) {
+      out.push(s); fully.push(true); continue;
+    }
+    // FB07 inceleme (low): ilk kalan yan-cümlenin başındaki bağlaç asılı kalmasın ("…, ama sen …"
+    // → "Ama sen …"): baştaki ve/ama/ancak/fakat düşer.
+    if (chunks[0] !== kept[0]) kept[0] = { ...kept[0], text: kept[0].text.replace(/^\s*(?:ve|ama|ancak|fakat)\s+/iu, "") };
     let rebuilt = kept.map((c, i) => (i === 0 ? "" : c.sep) + c.text).join("");
     if (chunks[0] !== kept[0]) rebuilt = rebuilt.replace(/^([a-zçğıöşü])/u, (c) => c.toLocaleUpperCase("tr"));
     out.push(rebuilt + (tail || ""));

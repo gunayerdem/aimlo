@@ -230,11 +230,17 @@ export function finalizeVisionFeedback(
     // FB07 · F43: maddenin TAMAMI hedge'li düşman tahmini ("Cypher … tel koymuş olabilir.")
     // ise kanıtsız sayılır → dizide kanıtlı madde varsa düşer; yoksa son madde (hedge'i
     // korunmuş, kesinleştirilmemiş hâliyle) kalır.
-    const proven = hasCoachContent(cleanedChecked) && !isOnlyHedgedEnemyClaim(c.text, lang);
+    const hedgedOnly = isOnlyHedgedEnemyClaim(c.text, lang);
+    const proven = hasCoachContent(cleanedChecked) && !hedgedOnly;
     // FB06 inceleme · F51: RC tekrar silmesiyle ""e indiyse yedek HAM src değil, RC'nin
     // guard'larından geçmiş fallbackText (katil/silah/headshot/sayım/konum süzülmüş).
     const unprovenSrc = c.fallbackText && hasCoachContent(cleanCoachText(c.fallbackText, lang)) ? c.fallbackText : src;
-    return { proven, text: finish(proven ? cleanedChecked : cleanCoachText(unprovenSrc, lang), VISION_ENEMY_ITEM_CAP, "enemyAnalysis") };
+    // FB07 inceleme · F43 (high): tamamı hedge'li madde KANITSIZ sayılır ama metni RC'li
+    // (cleanedChecked) kalır — eskiden kanıtsız dal HAM src'yi kullanıyordu → RC'nin sildiği
+    // headshot / "1v3" / konum ("Reyna seni kafadan vurarak girmiş olabilir.") son maddede geri
+    // geliyordu. Hedge cleanedChecked'te guardTrEnemyHedges ile zaten korunuyor.
+    const itemText = proven || (hedgedOnly && hasCoachContent(cleanedChecked)) ? cleanedChecked : cleanCoachText(unprovenSrc, lang);
+    return { proven, text: finish(itemText, VISION_ENEMY_ITEM_CAP, "enemyAnalysis") };
   }).filter((x) => hasCoachContent(x.text));
   const provenItems = eaItems.filter((x) => x.proven);
   const enemyAnalysis = (provenItems.length > 0 ? provenItems : eaItems.slice(-1)).map((x) => x.text);

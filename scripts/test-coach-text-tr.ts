@@ -462,6 +462,43 @@ console.log("\n[F43] FB07 — hedge'li düşman tahmini kesinleştirilmez; 2. ş
     "Cypher olarak kameranı B Main'e erken koydun. Hookah'ta öldün.",
     "Omen teleport noktasını B Main'e koydu. Hookah'ta öldün.",
   ]) t(`B35 NEG bayt-aynı: "${s.slice(0, 40)}…"`, rc(s) === s, `→ "${rc(s)}"`);
+
+  // FB07 inceleme · F43 (medium): "-yor olabilir" / isim + "olabilir" düşman tahmini de hedge.
+  // Korpus ham metinleri BİREBİR (HEAD: hepsi kesinleşiyordu — "kapatıyor.", "bekliyor;", "tuzak ve kamera;").
+  const y1 = tr("Cypher seni A Ramp'te sheriff ile bekliyor; telleri/kamerasıyla o hattı kapatıyor olabilir.");
+  t("F43b cycleb06-pre-syn-rp S23: '-yor olabilir' yan-cümlesi DÜŞER (HEAD: '…o hattı kapatıyor.')",
+    y1 === "Cypher seni A Ramp'te Sheriff ile bekliyor." && !/kapatıyor/.test(y1), `→ "${y1}"`);
+  for (const s of ["Düşman A Long'da Operator'la bekliyor olabilir.", "Cypher rakibe bilgi veriyor olabilir."]) {
+    const o2 = tr(s);
+    t(`F43b tek içerik '-yor olabilir': düşmez ama KESİNLEŞMEZ: "${s}"`, o2 === s, `→ "${o2}"`);
+  }
+  const n1 = tr("Cypher rakip rosterında olduğu için tuzak ve kamera olabilir; B Hall girişine gelmeden takımdan smoke/flash isteyip crossfire kurun.");
+  t("F43b cyclefinal S25 EA1: isim + 'olabilir' kesinleşmez ('tuzak ve kamera;' yok)", !/tuzak ve kamera;/.test(n1) && /olabilir/.test(n1), `→ "${n1}"`);
+  // FB07 inceleme (low): düşen yan-cümleden sonra asılı bağlaç / öncülsüz gösterme.
+  const c1 = tr("Takım arkadaşın Sova düşmanı görmüş olabilir, ama sen bilgiyi kullanmadın.");
+  t("F43c düşen yan-cümle sonrası asılı 'ama' yok (HEAD: 'Ama sen bilgiyi kullanmadın.')", c1 === "Sen bilgiyi kullanmadın.", `→ "${c1}"`);
+  const d1 = "Cypher rosterda; Hookah girişine tel/kamera veya op açısı kurmuş olabilir, o açıya direct bakıyordu.";
+  t("F43c cyclevariety5 S14 EA0: öncülü düşen 'o açıya' asılı kalmaz → madde bütün hedge'li (isOnlyHedgedEnemyClaim)",
+    onlyFn?.(d1, "tr") === true, `→ ${String(onlyFn?.(d1, "tr"))} / "${tr(d1)}"`);
+  // FB07 inceleme · F43 (high): tamamı hedge'li EA maddesi RC'li metinle kalır — HAM src değil.
+  // HEAD: RC'nin sildiği headshot / "1v3" / konum son maddede geri geliyordu.
+  const fgH = { ...buildFactGround({ died: true }, {}), playerAgentKnown: true, playerAgent: "Sova" };
+  const eaOnly = (s: string) => finalizeVisionFeedback(
+    { deathAnalysis: "Açıkta kaldın.", enemyAnalysis: [s], nextRoundSuggestion: "Smoke at." },
+    { factGround: fgH, lang: "tr", map: "haven", agent: "Sova", roundHistory: [] } as never,
+  ).enemyAnalysis;
+  const h1 = eaOnly("Reyna seni kafadan vurarak girmiş olabilir.");
+  t("F43d tek hedge'li madde: RC'nin sildiği 'kafadan' geri gelmez, hedge kalır (HEAD: ham src)",
+    h1.length === 1 && !/kafadan/.test(h1[0]) && /olabilir/.test(h1[0]), JSON.stringify(h1));
+  const h2 = eaOnly("Rakip 1v3 durumda retake'e gelmiş olabilir.");
+  t("F43d tek hedge'li madde: '1v3' geri gelmez", h2.length === 1 && !/1v3/.test(h2[0]), JSON.stringify(h2));
+  const h3 = eaOnly("Reyna A Main'e her round aynı yerden girmiş olabilir.");
+  t("F43d tek hedge'li madde: RC'nin sildiği konum ('A Main'e') geri gelmez", h3.length === 1 && !/A Main/.test(h3[0]), JSON.stringify(h3));
+  const h4 = finalizeVisionFeedback(
+    { deathAnalysis: "Açıkta kaldın.", enemyAnalysis: ["Killjoy B'ye taret koymuş olabilir.", "Omen seni kafadan vurarak girmiş olabilir."], nextRoundSuggestion: "Smoke at." },
+    { factGround: fgH, lang: "tr", map: "haven", agent: "Sova", roundHistory: [] } as never,
+  ).enemyAnalysis;
+  t("F43d iki madde de hedge'li: son madde RC'li ('kafadan' yok)", h4.length === 1 && !/kafadan/.test(h4[0]), JSON.stringify(h4));
 }
 
 // ════════════════════════════════════════════════════════════════════════════

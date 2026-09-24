@@ -423,6 +423,23 @@ console.log("\n[F45] NvM — kavram (1v1) korunur, iddia nötrlenir, yetim ek/ar
   const fewShot = /"deathAnalysis": "(Bu round [^"]*öndeyken[^"]*)"/.exec(SYSTEM_PROMPT)?.[1] ?? "";
   check("F45 vision-prompt SENARYO C few-shot'u guard'dan bayt-aynı geçer (NvM yok)",
     !!fewShot && nv(fewShot, "tr") === fewShot && !/\d\s*v\s*\d/.test(fewShot), `→ "${fewShot}"`);
+  // FB07 inceleme (low): "the NvM" (isimsiz), "was a 1v1", TR "NvM durumunda" — HEAD: "You lost the
+  // because…", "Don't throw the away…", "It was in an even fight…", "Bu round durumunda acele ettin.".
+  const NEUTRAL2: [string, "tr" | "en", string][] = [
+    ["You lost the 3v2 because you peeked alone.", "en", "You lost the numbers advantage because you peeked alone."],
+    ["Don't throw the 2v1 away by pushing.", "en", "Don't throw the numbers advantage away by pushing."],
+    ["You wasted the 1v3 by swinging first.", "en", "You wasted the outnumbered fight by swinging first."],
+    ["It was a 1v1 you should have won.", "en", "It was an even fight you should have won."],
+    ["Bu round 2v1 durumunda acele ettin.", "tr", "Bu round sayıca üstün durumda acele ettin."],
+    ["1v3 durumunda panikle peek attın.", "tr", "Sayıca az durumda panikle peek attın."],
+  ];
+  for (const [s, lang, want] of NEUTRAL2) {
+    const o = nv(s, lang);
+    check(`F45b nötr: "${s.slice(0, 44)}…"`, o === want && !ORPHAN.test(o), `→ "${o}"`);
+  }
+  for (const [s, lang] of [["Bu round 1v1 durumunda acele ettin.", "tr"], ["You lost the 1v1 because you peeked wide.", "en"]] as [string, "tr" | "en"][]) {
+    check(`F45b eşit sayı (düello kavramı) bayt-aynı: "${s}"`, nv(s, lang) === s, `→ "${nv(s, lang)}"`);
+  }
   // hasAliveCount=true iken (ileride güvenilir sinyal) dokunulmaz.
   const on = realityCheck("1v3 kaldın ve panikle peek attın.", [] as never, { ...fgA, hasAliveCount: true }, "generic", "tr").text;
   check("F45 hasAliveCount=true iken bayt-aynı", on === "1v3 kaldın ve panikle peek attın.", `→ "${on}"`);

@@ -1780,6 +1780,10 @@ function neutralizeAliveMatchups(text: string, tr: boolean): { text: string; del
   t = t.replace(R(`(clutch)\\s+${NVM_SRC}`), "$1");
   if (tr) {
     t = t.replace(R(`${NVM_SRC}\\s+(önde|geride)`), (m, n: string, mm: string, w: string) => (n === mm ? m : `${MK}sayıca ${w}`));
+    // FB07 inceleme (low): "2v1 durumunda acele ettin" → eskiden sayı silinip "Bu round durumunda
+    // acele ettin" kalıyordu. N≠M → "sayıca üstün/az durumda"; eşit (1v1 = düello) dokunulmaz.
+    t = t.replace(R(`${NVM_SRC}\\s+(?:durumunda|durumda|durumdayken)(?![\\p{L}])`), (m, n: string, mm: string) =>
+      (n === mm ? m : MK + (dir(n, mm) === "down" ? "sayıca az durumda" : "sayıca üstün durumda")));
     // İDDİA: çapa aynı yan-cümlede, en çok 2 sözcük sonra ("1v3 kaldın", "erken 4v5 bırakıyor").
     t = t.replace(
       R(`${NVM_SRC}(?:['’]\\s*(?:[dt][ae]|y?[ae]))?(?=\\s+(?:[\\p{L}'’]+\\s+){0,2}(?:${TR_ALIVE_ANCHORS})(?![\\p{L}]))`),
@@ -1799,13 +1803,23 @@ function neutralizeAliveMatchups(text: string, tr: boolean): { text: string; del
   } else {
     // İDDİA: "left/were/was (in) (a) NvM", "down (a) NvM".
     t = t.replace(
-      R(`(?<![\\p{L}])(left|were|was|down)\\s+(?:in\\s+)?(?:an?\\s+)?${NVM_SRC}`),
-      (_m, v: string, n: string, mm: string) => {
+      R(`(?<![\\p{L}])(left|were|was|down)\\s+(in\\s+)?(an?\\s+)?${NVM_SRC}`),
+      (_m, v: string, inW: string | undefined, art: string | undefined, n: string, mm: string) => {
         const d = dir(n, mm);
-        const w = d === "down" ? "outnumbered" : d === "up" ? "with the numbers advantage" : "in an even fight";
+        // FB07 inceleme (low): "It was a 1v1 you should have won" → eskiden "was in an even fight"
+        // ("a" yutuluyor, "in" ekleniyordu); artikel var + "in" yoksa "an even fight".
+        const w = d === "down" ? "outnumbered" : d === "up" ? "with the numbers advantage" : (art && !inW ? "an even fight" : "in an even fight");
         return v.toLowerCase() === "down" ? MK + w : `${v} ${w}`;
       },
     );
+    // FB07 inceleme (low): "the NvM" (isimsiz) → eskiden sayı silinip "You lost the because…",
+    // "Don't throw the away…" kalıyordu. N≠M → "the outnumbered fight" / "the numbers advantage";
+    // eşit sayı (düello kavramı) dokunulmaz. İsimli biçim ("the 3v2 fight") aşağıdaki kuralda.
+    t = t.replace(R(`(?<![\\p{L}])(the)\\s+${NVM_SRC}(?!\\s+(?:${EN_MATCHUP_NOUNS})(?![\\p{L}]))`), (m, art: string, n: string, mm: string) => {
+      const d = dir(n, mm);
+      if (d === "even") return m;
+      return d === "down" ? `${art} outnumbered fight` : `${art} numbers advantage`;
+    });
     // Artikel + N≠M + isim: aşağıda → "an outnumbered <isim>"; yukarıda → sayı düşer.
     t = t.replace(R(`(?<![\\p{L}])(an?|the)\\s+${NVM_SRC}\\s+(${EN_MATCHUP_NOUNS})(?![\\p{L}])`), (m, art: string, n: string, mm: string, noun: string) => {
       const d = dir(n, mm);
@@ -1986,6 +2000,13 @@ export function guardUnprovenFacts(
     // kalanı verbatim kalır — eski m.slice(m.indexOf(mid)) hilesi "The " tüketilince
     // ilk boşluğu "The"nin içinde bulup katil adını geri sızdırıyordu.
     // FB07 · F44: öncül (LEAD_ALT) STEP1 ile aynı — "Düşman Jett seni vurdu" → "Bir düşman seni vurdu".
+    // FB07 inceleme · F44 (low): "rakibin <Ajan>'i/'sı" öncülü iyelik ekini geride bırakıyordu →
+    // "Bir düşmanı seni vurdu". Öldürme yan-cümlesinde önce "Rakip <Ajan>"e indirilir; STEP2 onu
+    // "bir düşman"a çevirir ("Bir düşman seni vurdu").
+    result = result.replace(
+      new RegExp(`${NLB}(rakibin)\\s+(${NAME_ALT})['’]s?[ıiuü]${NL}(?=[^.!?;:—\\n]*?\\s${KV2}${NL})`, "gi"),
+      (_m: string, lead: string, name: string) => `${lead[0] === "R" ? "Rakip" : "rakip"} ${name}`,
+    );
     const SINGLE = new RegExp(`${NLB}(?:${LEAD_ALT})?${KILLER_TOKEN}\\b(?=[^.!?;:—\\n]*?\\s${KV2}${NL})`, "gi");
     // OYUNCU-KENDİ-AJANI MUAFİYETİ (W1 followup #51, W2 inceleme M1-R18): "<oyuncunun
     // ajanı> olarak" öbeği ("Jett olarak orada beklerken vuruldun" = oyuncu Jett'le
@@ -2012,14 +2033,24 @@ export function guardUnprovenFacts(
     //      → İYELİK MUAFİYETİ: ajan adından hemen sonra kesme işareti gelirse ("Sova'nın
     //      okları seni yakaladı", "Cypher's trip got you" = util/bilgi gözlemi) dokunulmaz.
     //      Oyuncunun kendi ajanı + "olarak" muafiyeti STEP2 ile aynı.
-    const KV2_CATCH = "(?:yakaladılar|yakaladı|got you)";
-    const SINGLE_CATCH = new RegExp(`${NLB}(?:${LEAD_ALT})?${KILLER_TOKEN}(?!['’])\\b(?=[^.!?;:—\\n]*?\\s${KV2_CATCH}${NL})`, "gi");
-    result = result.replace(SINGLE_CATCH, (m: string, off: number, full: string) =>
-      selfAgent
-        && m.replace(/^the\s+/i, "").toLowerCase() === selfAgent
-        && /^\s+olarak(?![a-zçğıöşüâîû])/i.test(full.slice(off + m.length))
-        ? m
-        : AN_ENEMY);
+    // FB07 inceleme · F53 (medium): "yakaladı" ve "got you" öldürme dışı anlam da taşır —
+    // HEAD: "As Jett, your dash got you onto site…" → "As an enemy, your dash…", "Your Sova got you
+    // info on B…" → "Your an enemy…", "Waiting for Sova to recon got you nothing" → "…for an enemy…",
+    // "Takım arkadaşın Sova oku attı ve düşmanı yakaladı" → "Takım arkadaşın bir düşman…". Artık:
+    // TR "yakaladı(lar)" yalnız token ile fiil arasında "seni" varsa; EN "got you" yalnız yan-cümle
+    // sonunda ya da öldürme tamlayıcısıyla (from/at/on/near/with/through/behind/there/here/again/
+    // first/early/late); müttefik ("your/takım arkadaşın <Ajan>") ve EN "as <oyuncunun ajanı>" muaf.
+    const KV2_CATCH_TR = "(?:yakaladılar|yakaladı)";
+    const KV2_CATCH_EN = "got you(?=\\s*(?:[.!?;:,—\\n]|$)|\\s+(?:from|at|on|near|with|through|behind|there|here|again|first|early|late)(?![a-zçğıöşüâîû]))";
+    const SINGLE_CATCH = new RegExp(`${NLB}(?:${LEAD_ALT})?${KILLER_TOKEN}(?!['’])\\b(?=[^.!?;:—\\n]*?\\s(?:seni\\s(?:[^.!?;:—\\n]*?\\s)?${KV2_CATCH_TR}${NL}|${KV2_CATCH_EN}))`, "gi");
+    const ALLY_BEFORE = /(?<![\p{L}])(?:your|takım\s+arkadaşın(?:ın)?|arkadaşın(?:ın)?|teammate['’]s|ally['’]s)\s+$/iu;
+    result = result.replace(SINGLE_CATCH, (m: string, off: number, full: string) => {
+      const token = m.replace(/^the\s+/i, "").toLowerCase();
+      if (selfAgent && token === selfAgent && /^\s+olarak(?![a-zçğıöşüâîû])/i.test(full.slice(off + m.length))) return m;
+      if (selfAgent && token === selfAgent && /(?<![\p{L}])as\s+$/iu.test(full.slice(0, off))) return m;
+      if (ALLY_BEFORE.test(full.slice(0, off))) return m;
+      return AN_ENEMY;
+    });
     //  (ii) yüklem-isim / edilgen / "öldün" kalıpları — yalnız ajan adı iner, cümle kalır.
     if (trText) {
       // "Katil Cypher'dı" → "Katil bir düşmandı" (kopula eki aşağıdaki ek tablosunda).
