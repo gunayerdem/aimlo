@@ -1538,8 +1538,12 @@ const TR_LOCATIVE_EXCEPTIONS: Record<string, string> = {
 // KANIT: HEAD replay'de 91 TR senaryonun 12 deathAnalysis'i rapor etiketiyle
 // başlıyor ("En kritik neden:", "Kök neden:", M1-R3b "En kritik kök: okunabilirlik
 // sızıntısı —"); raw==final → süzgeç BİREBİR geçiriyor. KÖK PROMPT'ta
-// (route.ts [AÇILIŞ] "(a) en kritik KÖK neden", ai-policy OUTPUT_FOCUS_RULE_VISION),
-// o düzeltme B09'da. Burası SINIR SAVUNMASI; zincire bağlama B03'te (yalnız
+// (lib/vision-prompt-builder.ts [AÇILIŞ] "(a) en kritik KÖK neden", ai-policy
+// OUTPUT_FOCUS_RULE_VISION). B09'da ölçülüp TR tarafı BİLİNÇLİ bırakıldı (TR etiketli
+// açılış b09-base'de 0/58; TR (a) + şekil yasağını içeren iki aday gerçek korpusta
+// m3/detector'da geriledi — ai-policy.ts "B09 ÖLÇÜM NOTU"); yalnız EN [OPENER] (a)
+// değişti. Yani TR kökü AÇIK: bu soyucu gereksiz değil, TR için tek savunma.
+// Burası SINIR SAVUNMASI; zincire bağlama B03'te (yalnız
 // deathAnalysis). DAR: yalnız metnin BAŞINDA ve İKİ NOKTA ile; cümle içi meşru
 // "round'un en kritik anı" DOKUNULMAZ.
 // [iİ] SINIFI ZORUNLU: /u bayrağında "İ" (U+0130) basit case-fold'la "i"ye inmez

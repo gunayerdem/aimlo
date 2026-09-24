@@ -104,7 +104,14 @@ console.log("\n[P6] TR-KALAN-05 prompt kökü — alan adı Türkçe ekle yazıl
   }
 }
 
-console.log("\n[P7] EN rapor user prompt'u Türkçe sabit taşımıyor; TR bayt-aynı");
+// B09 inceleme [3] (W3-fix 2026-09-24): başlık "EN user prompt'ta Türkçe sabit yok" diyordu ama
+// test yalnız B09'da düzeltilen 7 SABİTİ arıyor. EN fixture'ların (ER1-5) user prompt'unda
+// round-engine / improvement-plan üreticilerinden gelen 3-4 Türkçe satır HÂLÂ var
+// (lib/round-engine.ts:459/:471/:477 → "Top mistake / Worst pattern / Improvement areas",
+// lib/improvement-plan.ts:266 → "IMPROVEMENT FOCUS"; report-prompt.ts:1060-1095 ham gömüyor).
+// B09 öncesinden kalma, regresyon değil; kapatmak EN rapor prompt'unu değiştirir → ölçümlü
+// ayrı iş (followup). Başlık kapsamı dürüst söylüyor; kalan satırlar BİLİNEN SINIR olarak basılır.
+console.log("\n[P7] EN rapor user prompt'unda B09'da düzeltilen 7 Türkçe sabit yok; TR bayt-aynı");
 {
   const TR_CONST = ["kim seni en çok öldürdü", "en çok nerede öldün", "data yok", "SALDIRI", "SAVUNMA", "oyuncu site'lara giriyor", "oyuncu site'ları tutuyor"];
   const en = REPORT_FIXTURES.filter((f) => f.body.lang === "en");
@@ -115,7 +122,9 @@ console.log("\n[P7] EN rapor user prompt'u Türkçe sabit taşımıyor; TR bayt-
     if (!v.valid) { t(`${fx.id}: validateRequest`, false, v.error); continue; }
     const { userPrompt } = buildReportPrompts(v.data, { memoryContext: fx.memoryContext });
     const hits = TR_CONST.filter((c) => userPrompt.includes(c));
-    t(`${fx.id}: EN user prompt'ta Türkçe sabit yok`, hits.length === 0, `(${hits.join(", ")})`);
+    t(`${fx.id}: EN user prompt'ta B09'da düzeltilen Türkçe sabitler yok`, hits.length === 0, `(${hits.join(", ")})`);
+    const trLines = userPrompt.split("\n").filter((l) => /[çğıöşüÇĞİÖŞÜ]/.test(l));
+    if (trLines.length) console.log(`     ℹ BİLİNEN SINIR (${fx.id}): EN user prompt'ta ${trLines.length} Türkçe karakterli satır — ${trLines.map((l) => l.trim().slice(0, 48)).join(" | ")}`);
     t(`${fx.id}: EN etiketler var`, /Top killers \(who killed you most\)/.test(userPrompt) && /Top death locations \(where you died most\)/.test(userPrompt));
   }
   for (const fx of tr) {

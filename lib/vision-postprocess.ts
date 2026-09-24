@@ -143,7 +143,9 @@ export function finalizeVisionFeedback(
   // "En kritik neden:", "Kök neden: okunabilirlik sızıntısı —" gibi rapor
   // etiketleri (HEAD replay 12/91 DA). realityCheck'ten ÖNCE: yan-cümle silmesi
   // etiketi yetim bırakmasın ("Kök neden: okunabilirlik sızıntısı." kalıntısı).
-  // Kök (prompt) düzeltmesi ayrı paket (B09).
+  // Kök (prompt): B09'da ölçülüp TR tarafı BİLİNÇLİ bırakıldı (TR etiketli açılış
+  // tabanda 0/58; TR değişikliğini içeren adaylar m3/detector'da geriledi — ai-policy.ts
+  // "B09 ÖLÇÜM NOTU"); yalnız EN [OPENER] (a) değişti. TR için bu soyucu tek savunma.
   const daIn = stripDiagnosisLabel(fixNames(fb.deathAnalysis), lang);
   const nrIn = fixNames(fb.nextRoundSuggestion);
 

@@ -8,6 +8,9 @@
 // BANNED PHRASES — canonical union of all routes
 // ═══════════════════════════════════════════════════════════
 
+// B09 ÖLÇÜM NOTU (2026-09-24, TR-KALAN-04): 5 yeni kalıp (veri-yokluğu / tutanak dili)
+// META_SOURCE_BAN_RULE maddeleriyle birlikte eklenip ölçüldü ve GERİ ALINDI (hedef
+// düşmedi: veri-yokluğu cümlesi 1 → 3 → 3) — ayrıntı META_SOURCE_BAN_RULE üstünde.
 export const BANNED_PHRASES = [
   "daha dikkatli oyna",
   "dikkatli ol",
@@ -256,7 +259,13 @@ export const HP_BAN_RULE = `\nCAN/HP İDDİASI TOTAL YASAK: Feedback metnine oyu
 
 // 'raporlan-' ailesi eklendi (canlı-test #11, 2026-08-05 — kanıt F: canlıda
 // "Katil Jett olarak raporlanmış" bu kuralı da süzgeci de atladı).
-export const META_SOURCE_BAN_RULE = `\nVERİ-KAYNAĞI DİLİ YASAK (meta-dil): Feedback metninde veri kaynaklarından ASLA bahsetme — "OCR", "kayıt/kayıtta/kayıtlı", "sistem", "tespit edildi", "veriye/verilere göre", "olarak raporlandı/raporlanmış/rapor edildi", "rapora göre" gibi kaynak-atıflı hiçbir ifade yazma. Olguyu DOĞRUDAN söyle: "Phoenix seni B Exit'te öldürdü." DE; "katil olarak kayıtta var" / "OCR'da görünüyor" / "katil Jett olarak raporlanmış" DEME. (Oyuncuya oyun-içi ekranı öğütlemek — "killfeed'i oku" — serbest; yasak olan kendi verini kaynak diye anman.)`;
+// B09 ÖLÇÜM NOTU (2026-09-24, TR-KALAN-04 prompt yarısı): bu kurala TUTANAK ve
+// VERİ-YOKSA-SESSİZ-KAL maddeleri + BANNED_PHRASES'e 5 kalıp eklenip ölçüldü ve GERİ
+// ALINDI — meta-dil (findMetaTermHits, ham) 6 → 4 → 6, veri-yokluğu cümlesi 1 → 3 → 3
+// (hedef düşmedi); cand2 M0-R0 ham çıktısında yeni yasak metnin kendisi ("veri setinde")
+// çıktı. Sınır savunması lib/coach-text süzgecinde (B01). Etki-ayrıştırmalı A/B olmadan
+// yeniden EKLEME.
+export const META_SOURCE_BAN_RULE =`\nVERİ-KAYNAĞI DİLİ YASAK (meta-dil): Feedback metninde veri kaynaklarından ASLA bahsetme — "OCR", "kayıt/kayıtta/kayıtlı", "sistem", "tespit edildi", "veriye/verilere göre", "olarak raporlandı/raporlanmış/rapor edildi", "rapora göre" gibi kaynak-atıflı hiçbir ifade yazma. Olguyu DOĞRUDAN söyle: "Phoenix seni B Exit'te öldürdü." DE; "katil olarak kayıtta var" / "OCR'da görünüyor" / "katil Jett olarak raporlanmış" DEME. (Oyuncuya oyun-içi ekranı öğütlemek — "killfeed'i oku" — serbest; yasak olan kendi verini kaynak diye anman.)`;
 
 export const META_SOURCE_BAN_RULE_EN = `\nDATA-SOURCE LANGUAGE BANNED (meta-language): Never mention your data sources in the feedback — no "OCR", "recorded", "reported as", "as reported", "the system", "detected", "according to the data", "the logs". State the fact DIRECTLY: say "Phoenix killed you at B Exit." — never "the killer is recorded as Phoenix" or "the killer was reported as Phoenix". (Telling the player to read the in-game killfeed as advice is fine; referring to your own data pipeline is not.)`;
 
@@ -280,7 +289,12 @@ BU LİSTE DIŞINDA İNGİLİZCE KELİME KULLANMA. Zorunlu çeviri: pre-aim→aç
 // eklendi; KB'nin aynı fiili öğreten örnek cümleleri aynı commit'te "öldün/öldürdü"ye
 // çevrildi (verify-kb [17] kilitler). ÖLÇÜM (b09-base → b09-cand/cand2, ham, TR 58 örnek):
 // "seni … aldı/kesti/temizledi/indirdi" 13 → 2 / 2, ölüm anlamlı "düş-" 1 → 0 / 0.
-export const NATURAL_COACH_RULE = `\nDOĞAL KOÇ DİLİ: Gerçek bir Radiant koç gibi DOĞRUDAN, sokak ağzıyla konuş. Kitabi/çeviri kelime YASAK:
+// W3-fix DOĞRULAMASI (2026-09-24, commit edilen alt küme TEK BAŞINA; taban bc026ac ×3,
+// aday 7fc9df7-içeren HEAD ×3 gerçek korpus, ×2 TR poster/kart + EN): kabul EDİLDİ —
+// ihlal artmadı, detector/m1/m3 farkı koşu-düzeyi gürültü içinde (tablo: B09 inceleme
+// commit'i). ÖNEMLİ: AYNI taban commit'i m3'te 0.591 / 0.727 / 0.591, detector'da 70.0 /
+// 67.2 / 67.3 verdi — "tarihsel olarak sabit 0.591" bir örneklem tesadüfüydü.
+export const NATURAL_COACH_RULE =`\nDOĞAL KOÇ DİLİ: Gerçek bir Radiant koç gibi DOĞRUDAN, sokak ağzıyla konuş. Kitabi/çeviri kelime YASAK:
 "cezalandırıyor/cezalandırdı/cezalandıracak" → "ucuza öldürüyor / aynı açıdan kafadan vuruyor"
 "konumlandırma/pozisyonlandırma/konuşlanma" → "pozisyon / açı"
 "kuru entry/kuru giriş/kuru peek" → "utility'siz giriş / dry peek"
@@ -417,7 +431,10 @@ export const OUTPUT_FOCUS_RULE = `\nODAK KURALI:
 // etki ayrıştırılamadı. TR'de hedef sınıf (etiketli açılış) tabanda 0/58 olduğundan TR tarafı
 // DEĞİŞTİRİLMEDİ; EN [OPENER] (a) düzeltmesi (Root cause 2/10 → 0) ayrı,
 // lib/vision-prompt-builder.ts. Sınır savunması: lib/coach-text stripDiagnosisLabel (B03).
-export const OUTPUT_FOCUS_RULE_VISION = `\nODAK KURALI:
+// W3-fix NOTU: m3/detector "gerilemesi" artık kanıt SAYILMAZ — aynı taban commit'i 3 koşuda
+// m3 0.591/0.727/0.591, detector 70.0/67.2/67.3 verdi (aday aralığıyla örtüşüyor). Geri alma
+// kararının dayanağı yalnız hedef-sınıf kanıtı: şekil yasağı TR iki-noktalı açılışı 0 → 5/58.
+export const OUTPUT_FOCUS_RULE_VISION =`\nODAK KURALI:
 - SADECE en önemli 1 soruna odaklan, 1 net fix ver (alternatif şart değil).
 - 1-2 cümle, en fazla. Paragraf/narration YASAK.
 - Mikro-pozisyon ZORUNLU: "A Short", "B Main entry" — yalnız "site"/"mid" KABUL EDİLMEZ.
@@ -487,7 +504,11 @@ export const DECISION_SCORE_RUBRIC = `\nKARAR SKORU RUBRİK:
 // sınıf (KB tırnaklı örnek cümlesinin 6-gram birebir geçişi) tabanda 0/58 → ölçülebilir fayda
 // yok, ölçülen zarar var. Kalıcı kaynak düzeltmesi KB tarafında yapıldı (tırnaklı "…düştün"
 // örnekleri → "öldün", verify-kb [17]); bu kural bilinçli olarak bugünkü hâlinde.
-export const KB_SOURCE_RULE = `\n🎯 KAYNAK = KB (knowledge blokları) — EN ÖNEMLİ KURAL:
+// W3-fix NOTU: yukarıdaki "ölçülen zarar" (m3/m1/detector) taban gürültüsü içinde çıktı — aynı
+// taban commit'i 3 koşuda m3 0.591/0.727/0.591, m1 0.048/0.095/0.095, detector 70.0/67.2/67.3.
+// Geri alma yine doğru (hedef sınıf tabanda 0/58 → fayda yok), ama "zarar kanıtlandı" DENEMEZ;
+// yeniden denemek etki-ayrıştırmalı ve koşu başına ≥3 tekrarlı A/B ister.
+export const KB_SOURCE_RULE =`\n🎯 KAYNAK = KB (knowledge blokları) — EN ÖNEMLİ KURAL:
 Sen koçluğu SIFIRDAN UYDURMAZSIN. OCR'dan gelen gerçeği (ajan + harita + ölüm yeri + düşman + skor) yukarıdaki knowledge bloklarıyla EŞLERSİN ve feedback'i o blokların DİLİYLE verirsin.
 - Bu ölümü KB'deki kalıp/hata bloklarıyla (IF/MEANING/COUNTER/WHY satırları, agent "Sık Yapılan Hatalar", harita "Ölüm Bölgeleri"/"Callout'lar") eşle; başlık adı dosyadan dosyaya değişir, İÇERİĞE bak. En uygun olanı seç.
 - O bloğun ifadesini AL, sadece spesifik callout/ajan/silah/duruma uyarla. KB'nin Türkçesi senin Türkçenden İYİDİR — onun cümlesini kullan, kendi cümleni kurma.

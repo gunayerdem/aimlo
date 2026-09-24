@@ -532,6 +532,11 @@ export function buildDeathTypeDirective(
   // Canlı-test #14 (kod-ad sızıntısı): 'Bu ölümün tipi: ${type}.' cümlesi SİLİNDİ —
   // R7/R11/R23'te enum slug'ı kullanıcı metnine verbatim sızdı ('over-peek-advantage
   // hatasını yaptın'). KB bölüm BAŞLIĞI işaretçi olarak yeterli; ~10 token/istek kâr.
+  // B09 ÖLÇÜM NOTU (2026-09-24, TR-KALAN-07): bu direktife "bölüm BAŞLIĞINI da çıktıya
+  // YAZMA" maddesi eklenip ölçüldü ve GERİ ALINDI — hedef sınıf (KB başlığının çıktıda
+  // birebir geçişi) b09-base'de 0/58; maddeyi içeren iki aday gerçek korpusta m3
+  // 0.591 → 0.818/0.773, detector 70.0 → 68.0/65.2 verdi (etki ayrıştırılamadı).
+  // Etki-ayrıştırmalı A/B olmadan yeniden EKLEME (ai-policy.ts B09 ÖLÇÜM NOTU'ları).
   return (
     `\n[ÖLÜM-TİPİ İPUCU — bu round'un odağı]\n` +
     `Bu ölümün KB bölümü: "${g.kbBlock}".\n` +
