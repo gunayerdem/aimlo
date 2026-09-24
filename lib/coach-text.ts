@@ -381,6 +381,11 @@ const TR_JARGON: [RegExp, string][] = [
   //    -miş'i + tahmin adverb'lerini siler/kesin'e çevirir. SIRA: önce olasılık
   //    modalı düşer ("vurmuş olabilirsin"→"vurmuş"), sonra -miş→-di ("vurdu").
   //    JS \b Türkçe harfte (ş/ı/ü) kırıldığı için -miş'te lookbehind/lookahead.
+  // FB07 · F43 — 2. ŞAHIS genel kuraldan ÖNCE: "koymuş olabilirsin" eskiden "koymuş" →
+  // "koydu" (3. şahıs!) oluyordu (cycle5 S16 "Deadlock olarak duvarı … koydu", cyclereal-r3d2
+  // M0-R0 "peek attı"). Şahıs korunur, ünlü uyumu -mış'ın ünlüsünden: koymuşsun, atmışsın,
+  // etmişsin, görmüşsün. Ek kuralları (vurmuş→vurdu …) "-mışsın"a DOKUNMAZ (sağ sınır).
+  [/(?<![\p{L}])([\p{L}]*m([ıiuü])ş)\s+olabilirsin(?:iz)?(?![\p{L}])/giu, "$1s$2n"],
   [/\s+olabilirsiniz(?![a-zçğıöşü])/gi, ""],
   [/\s+olabilirsin(?![a-zçğıöşü])/gi, ""],
   [/\s+olabilirler(?![a-zçğıöşü])/gi, ""],
@@ -1746,6 +1751,122 @@ function tidyHpStripResidue(t: string, lang: "tr" | "en"): string {
       p + (lang === "tr" ? c.toLocaleUpperCase("tr") : c.toUpperCase()));
 }
 
+// ── HEDGE'Lİ DÜŞMAN İDDİASI (FB07 · F43, 2026-09-24) ─────────────────────────────
+// KANIT: TR_JARGON hedge neti (" olabilir" sil → "-miş"→"-di") ÖZNEYE BAKMADAN ve
+// realityCheck'ten SONRA çalışıyordu → modelin "bilmiyorum" işareti silinip DÜŞMAN
+// hakkındaki tahmin kesin olguya dönüyordu; guard'lar bu olguyu hiç görmüyordu:
+//   cyclevariety1 S3 "Cypher B veya Garage girişlerine tel/kamera koymuş olabilir, …"
+//     → "Cypher … tel ya da kamera koydu, …"
+//   cycleb09-cand2-trpc omen-b "… dash/aggro ile ani giriş yapmış olabilir" → "… giriş yaptı"
+// Korpus (b9b0564): TR ham alanların 32'sinde "-miş olabilir".
+// KURAL (ai-policy "Bilmiyorsan O KONUYU AÇMA … 'olabilir' deme, sus"): düşman öznesi
+// (ajan adı — "<ajan> olarak" hariç —, rakip, düşman) taşıyan CÜMLEDE 3. şahıs
+// "-miş olabilir(ler)" yan-cümlesi DÜŞER (kesinleştirilmez). Birim yan-cümle: [,;:—–]
+// ve yalnız solu çekimli yüklemle biten "ve/ama/ancak/fakat" ("tel ve kamera" bölünmez).
+// Cümlenin tamamı hedge'liyse cümle düşer — metinde başka içerikli cümle kaldıkça.
+// En az bir cümle kalma kuralı: metnin TAMAMI hedge'li düşman iddiasıysa hiçbir şey
+// düşmez ve hedge KORUNUR (TR_JARGON onu kesinleştiremesin diye yer tutucuyla saklanır)
+// — tahmin tahmin olarak kalır, uydurma olguya dönmez. EA'da böyle madde "kanıtsız"
+// sayılır (isOnlyHedgedEnemyClaim → vision-postprocess; son madde düşmez).
+// ÖLÜM ÇEKİRDEĞİ MUAF: "seni … vurmuş/öldürmüş olabilir" = ölüm ölçülmüş olgu; katil
+// kimliği realityCheck'te (KV2 artık -miş biçimleri de tanır) "bir düşman"a iner →
+// eski kesinleştirme ("vurdu") sürer.
+// 2. şahıs ("olabilirsin") bu kurala girmez → TR_JARGON'daki şahıs-koruyan kural.
+const HEDGE3_SRC = "(?<![\\p{L}])[\\p{L}]*m[ıiuü]ş\\s+olabilir(?:ler)?(?![\\p{L}])";
+const HEDGE3_RE = new RegExp(HEDGE3_SRC, "iu");
+const HEDGE_ENEMY_SUBJ_RE = new RegExp(
+  `(?<![\\p{L}])(?:${AGENT_ALT_CT}|Kayo|düşman|rakip|rakib)(?:['’]?[\\p{L}]{0,6})?(?![\\p{L}])(?!\\s+olarak(?![\\p{L}]))`,
+  "iu",
+);
+const HEDGE_DEATH_CORE_RE = /(?<![\p{L}])seni(?![\p{L}])[^.!?\n]{0,60}?(?:öldürmüş|vurmuş|kesmiş|düşürmüş|indirmiş|biçmiş|avlamış|devirmiş)\s+olabilir(?:ler)?(?![\p{L}])/iu;
+// Bağlaçtan bölmek için sol yan-cümlenin çekimli yüklemle bitmesi şartı.
+const TR_FINITE_END_RE = /(?:[dt][ıiuü](?:n|m|k|nız|niz|nuz|nüz|lar|ler)?|m[ıiuü]ş(?:s[ıiuü]n|t[ıiuü]r|lar|ler)?|yor(?:du|dun|sun|lar)?|olabilir(?:ler)?|(?<![\p{L}])(?:var|yok))$/iu;
+const isHedgedEnemyClause = (c: string) => HEDGE3_RE.test(c) && !HEDGE_DEATH_CORE_RE.test(c);
+// Kalan yan-cümlenin kendi öznesi / kipi: düşman öznesi, 2. şahıs ya da gereklilik öğüdü.
+const SELF_CONTAINED_RE = new RegExp(
+  `${HEDGE_ENEMY_SUBJ_RE.source}`
+  + "|(?<![\\p{L}])(?:sen|seni|sana|senin|seninle)(?![\\p{L}])"
+  + "|[\\p{L}](?:[dt][ıiuü]n|m[ıiuü]şs[ıiuü]n|yorsun|[ae]c[ae]ks[ıi]n|m[ae]l[ıi](?:s[ıi]n)?)(?![\\p{L}])",
+  "iu",
+);
+
+type HedgeScan = { text: string; allHedged: boolean };
+
+/** Cümleleri ayırır, düşman-öznesi + hedge'li yan-cümleleri düşürür (FB07 · F43). */
+function scanHedgedEnemyClaims(t: string): HedgeScan {
+  const parts = t.split(/((?<=[.!?…])\s+)/);
+  const sentences: string[] = [];
+  const seps: string[] = [];
+  for (let i = 0; i < parts.length; i += 2) { sentences.push(parts[i]); seps.push(parts[i + 1] ?? ""); }
+  const fully: boolean[] = [];
+  const out: string[] = [];
+  for (const s of sentences) {
+    if (!s.trim() || !HEDGE3_RE.test(s) || !HEDGE_ENEMY_SUBJ_RE.test(s)) { out.push(s); fully.push(false); continue; }
+    const term = /[.!?…]+["'”’)\]]*\s*$/.exec(s);
+    const body = term ? s.slice(0, term.index) : s;
+    const tail = term ? term[0] : "";
+    // Yan-cümle bölme: noktalama ayraçları her zaman; bağlaç yalnız sol çekimli yüklemse.
+    const chunks: { sep: string; text: string }[] = [];
+    const SPLIT = /\s*[,;:—–]\s*|\s+(?:ve|ama|ancak|fakat)\s+/giu;
+    let sep = "", last = 0, m: RegExpExecArray | null;
+    while ((m = SPLIT.exec(body))) {
+      const left = body.slice(last, m.index);
+      if (/[,;:—–]/.test(m[0]) || TR_FINITE_END_RE.test(left.trim())) {
+        chunks.push({ sep, text: left });
+        sep = m[0];
+        last = m.index + m[0].length;
+      }
+    }
+    chunks.push({ sep, text: body.slice(last) });
+    const kept = chunks.filter((c) => !isHedgedEnemyClause(c.text));
+    if (kept.length === chunks.length) { out.push(s); fully.push(false); continue; }
+    if (!kept.some((c) => hasCoachContent(c.text))) { out.push(s); fully.push(true); continue; }
+    // ÖZNEYİ TAŞIYAN ilk yan-cümle düştüyse kalan, kendi öznesini (ajan/rakip/düşman,
+    // 2. şahıs) ya da öğüt kipini taşımıyorsa ASILI kalır ("…taret yerlemiş olabilir,
+    // uzun açıyı kapatıp trade imkânı bırakmıyor" → "Uzun açıyı kapatıp…"; "…koymuş
+    // olabilir, bu açı savunmayı güçlü kılıyor" → "Bu açı…"; korpus ölçümü) → cümlenin
+    // tamamı hedge'li sayılır.
+    if (chunks[0] !== kept[0] && !SELF_CONTAINED_RE.test(kept.map((c) => c.text).join(" "))) {
+      out.push(s); fully.push(true); continue;
+    }
+    let rebuilt = kept.map((c, i) => (i === 0 ? "" : c.sep) + c.text).join("");
+    if (chunks[0] !== kept[0]) rebuilt = rebuilt.replace(/^([a-zçğıöşü])/u, (c) => c.toLocaleUpperCase("tr"));
+    out.push(rebuilt + (tail || ""));
+    fully.push(false);
+  }
+  const anyKeep = out.some((s, i) => !fully[i] && hasCoachContent(s));
+  let text = "";
+  for (let i = 0; i < out.length; i++) {
+    if (fully[i] && anyKeep) continue;              // tamamı hedge'li cümle düşer
+    text += (text ? seps[i - 1] || " " : "") + out[i];
+  }
+  return { text, allHedged: !anyKeep && fully.some(Boolean) };
+}
+
+/** TR metnin TAMAMI hedge'li (-miş olabilir) düşman iddiası mı? (FB07 · F43) — vision
+ *  EA maddesi bu durumda "kanıtsız" sayılır; dizide kanıtlı madde varsa düşer. */
+export function isOnlyHedgedEnemyClaim(text: string, lang: "tr" | "en"): boolean {
+  if (lang !== "tr" || !text) return false;
+  return scanHedgedEnemyClaims(text).allHedged;
+}
+
+/** TR_JARGON'dan ÖNCE: hedge'li düşman yan-cümlelerini düşürür; düşürülemeyenlerin
+ *  hedge'ini yer tutucuyla saklar (TR_JARGON "koymuş olabilir"i "koydu"ya çeviremesin).
+ *  restore() TR_JARGON'dan SONRA çağrılır. Eşleşme yoksa metin bayt-aynı. */
+function guardTrEnemyHedges(t: string): { text: string; restore: (s: string) => string } {
+  if (!HEDGE3_RE.test(t) || !HEDGE_ENEMY_SUBJ_RE.test(t)) return { text: t, restore: (s) => s };
+  const scan = scanHedgedEnemyClaims(t);
+  if (!scan.allHedged) return { text: scan.text, restore: (s) => s };
+  // Yer tutucu: harf/rakam İÇERMEYEN özel-kullanım karakterleri (TR_JARGON'un hiçbir
+  // kuralı eşleşemez); sıra numarası U+E100+i ile kodlanır.
+  const saved: string[] = [];
+  const text = scan.text.replace(new RegExp(HEDGE3_SRC, "giu"), (m) => {
+    saved.push(m);
+    return "" + String.fromCharCode(0xE100 + saved.length - 1);
+  });
+  return { text, restore: (s) => s.replace(/([-])/g, (_m, c: string) => saved[c.charCodeAt(0) - 0xE100] ?? "") };
+}
+
 export function cleanCoachText(text: string, lang: "tr" | "en"): string {
   if (!text) return text;
   // Sıra: sayısal HP → kova ifadesi (stripNumericHp) → kova dahil TÜM nitel
@@ -1789,7 +1910,12 @@ export function cleanCoachText(text: string, lang: "tr" | "en"): string {
     // cleanCoachText merkezi katman olduğu için vision/report/feedback/
     // insight/ask çıktı yolları otomatik kapsanır (S1 kök kapama).
     t = stripMetaTerms(t);
+    // FB07 · F43: hedge'li düşman iddiası TR_JARGON'un hedge netinden ÖNCE düşer
+    // (ya da tek içerikse korunur) — bkz. guardTrEnemyHedges.
+    const hedgeGuard = guardTrEnemyHedges(t);
+    t = hedgeGuard.text;
     for (const [re, rep] of TR_JARGON) t = t.replace(re, rep);
+    t = hedgeGuard.restore(t);
     // 2. çoğul → 2. tekil (B25, 2026-07-31): TR_JARGON'dan SONRA — jargon
     // dönüşümleri de çoğul çekim üretebiliyor ("swing yapın" → "swing atın").
     t = singularizeTrImperatives(t);

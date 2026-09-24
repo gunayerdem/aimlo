@@ -1498,12 +1498,16 @@ const ENEMY_UTIL_NOUNS = [
   "smoke", "duman", "flash", "molly", "molotof", "tuzak", "trap", "trapwire",
   "tripwire", "ult", "ultimate", "util", "utility", "yetenek", "duvar", "wall",
   "drone", "dart", "mayın", "kafes", "stun", "nade",
+  // FB07 · F43: Cypher/Killjoy cihaz dili (korpus: "Cypher … tel ya da kamera koydu",
+  // "Killjoy … taret ya da molly"). "tel" kısa kök → aşağıda YALNIZ hâl ekleriyle
+  // (teleport/telafi/telefon eşleşmesin).
+  "kamera", "cihaz", "taret", "turret", "alarm bot", "nanoswarm",
 ];
 const ENEMY_UTIL_PAST_VERBS = [
   // TR — yalnız 3. tekil geçmiş
   "attı", "atmıştı", "açtı", "açmıştı", "kurdu", "kurmuştu", "dizdi", "dizmişti",
   "bıraktı", "bırakmıştı", "yerleştirdi", "yerleştirmişti", "kullandı", "kullanmıştı",
-  "patlattı", "çekti",
+  "patlattı", "çekti", "koydu", // FB07 · F43: "koydu" ("placed" zaten listede)
   // EN aynası
   "threw", "placed", "lined", "popped", "dropped", "flashed", "walled", "used",
 ];
@@ -1512,7 +1516,8 @@ const ENEMY_SUBJECT_RE = new RegExp(
   "iu",
 );
 const ENEMY_UTIL_NOUN_RE = new RegExp(
-  `(?<![\\p{L}])(?:${ENEMY_UTIL_NOUNS.map(escapeRe).join("|")})(?:['’]?[\\p{L}]{0,8})?(?![\\p{L}])`,
+  `(?<![\\p{L}])(?:(?:${ENEMY_UTIL_NOUNS.map(escapeRe).join("|")})(?:['’]?[\\p{L}]{0,8})?`
+  + `|tel(?:['’]?(?:ler)?(?:[ıi]n[ıi]|[ıi]yle|[ıi]n|[ıi]|[ae]|d[ae]n?|l[ae]))?)(?![\\p{L}])`,
   "iu",
 );
 const ENEMY_UTIL_VERB_RE = new RegExp(
@@ -1702,7 +1707,9 @@ export function guardUnprovenFacts(
     // DAHİL (yoksa "Bir bir düşman…"). THE bu kümenin alt kümesi → eski "the" davranışı aynı.
     const LEAD_ALT = "(?:bir\\s+)?(?:düşman|rakip)\\s+|rakibin\\s+|(?:(?:an?|the)\\s+)?enemy\\s+|the\\s+";
     const KILLER_TOKEN = `(?:${NAME_ALT}|unknown|bilinmeyen)`;
-    const KV2 = "(?:vurup öldürdü|öldürdü|öldürdün|öldürüldün|kestiler|kesti|vuruldun|vurdun|vurdu|düşürdü|indirdi|biçti|aldılar|aldı|avladı|devirdi|götürdü|temizledi|killed you|shot you|killed|shot|picked you off|took you down|caught you)";
+    // FB07 · F43: hedge'li (-miş) katil biçimleri de — "Jett seni vurmuş olabilir" coach-text'in
+    // hedge netinden ÖNCE burada "bir düşman"a iner (sıra ne olursa olsun katil uydurulmaz).
+    const KV2 = "(?:vurup öldürdü|öldürdü|öldürdün|öldürüldün|kestiler|kesti|vuruldun|vurdun|vurdu|düşürdü|indirdi|biçti|aldılar|aldı|avladı|devirdi|götürdü|temizledi|öldürmüş|vurmuş|kesmiş|killed you|shot you|killed|shot|picked you off|took you down|caught you)";
     const NLB = "(?<![a-zçğıöşüâîû])", NL = "(?![a-zçğıöşüâîû])";
     // STEP1: ≥2 üyeli katil-disjunction ("X ya da Y ya da Z" / "X or Y") → tek genel-düşman
     // TR-KALAN-21 (2026-09-23): STEP1 "çoklu aday = katil hedge'i" varsayımıyla
@@ -1945,7 +1952,8 @@ export function guardUnprovenFacts(
   if (factGround.hasWeapon === false) {
     const WALT = WEAPON_NAMES.map(escapeRe).sort((a, b) => b.length - a.length).join("|");
     const NLB = "(?<![a-zçğıöşüâîû])", NL = "(?![a-zçğıöşüâîû])";
-    const WKV = "(öldürdü|öldürdün|vurdu|vurdun|kesti|düşürdü|indirdi|biçti)";
+    // FB07 · F43: hedge'li (-miş) biçimler de ("seni Operator ile vurmuş olabilir").
+    const WKV = "(öldürdü|öldürdün|vurdu|vurdun|kesti|düşürdü|indirdi|biçti|öldürmüş|vurmuş|kesmiş)";
     // "seni ... operator'la ... öldürdü" → silahı (+edatı) sil, geri kalanı koru.
     const re = new RegExp(
       `((?<![a-zçğıöşü])seni(?![a-zçğıöşü])[^.!?;:—\\n]{0,40}?)${NLB}(?:${WALT})${NL}\\s*['’]?\\s*(?:l[ae]|ile)?\\s+([^.!?;:—\\n]{0,30}?)${WKV}${NL}`,

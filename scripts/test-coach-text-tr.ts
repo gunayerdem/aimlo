@@ -8,6 +8,8 @@
  * engeller — her vaka canlı çıktıdan BİREBİR alınmıştır.
  */
 import * as CT from "../lib/coach-text";
+import { finalizeVisionFeedback } from "../lib/vision-postprocess";
+import { realityCheck, buildFactGround } from "../lib/reality-checker";
 const { cleanCoachText, finalizeCoachText } = CT;
 // B01 (2026-09-23) yeni saf fonksiyonları dinamik erişimle: fonksiyon yoksa (eski
 // kod) test DERLEME hatası yerine ❌ ile KIRMIZI yanar — fix-olmadan-kırılır kanıtı
@@ -409,6 +411,54 @@ console.log("\n[21] CANLI-TEST-07 — finalizeCoachText boşalınca HAM metne d�
   t("check boşalttı + fallback var → süzülmüş fallback",
     chk("Jett seni B Main'de vurdu.", "Maçı 11-13 kaybettin.") === "Maçı 11-13 kaybettin.",
     `→ "${chk("Jett seni B Main'de vurdu.", "Maçı 11-13 kaybettin.")}"`);
+}
+
+console.log("\n[F43] FB07 — hedge'li düşman tahmini kesinleştirilmez; 2. şahıs korunur");
+{
+  // Korpus HEAD (b9b0564) ham metinleri BİREBİR. Fix olmadan: "koymuş olabilirsin" →
+  // "koydu" (şahıs kayması), "tel/kamera koymuş olabilir" → "koydu" (uydurma olgu),
+  // "Muhtemelen Jett seni Operator ile vurmuş olabilir" → "Jett seni Operator ile vurdu".
+  const s16 = tr("B Site'de, sol açıdayken Jett seni Vandal'la kafadan kesti — Deadlock olarak duvar/tuzağı orada fazla açığa koymuş olabilirsin; sonraki savunmada o sol açıyı smoke/tuzağa bırakıp oraya direkt durma.");
+  t("cycle5 S16: 'koymuş olabilirsin' → 'koymuşsun' (2. şahıs korunur)", /koymuşsun;/.test(s16) && !/koydu;/.test(s16), `→ "${s16}"`);
+  const m0 = tr("Bu round ölmüşsün değil; takımın 0-0 başladı ve Jett olarak giriş sorumluluğun vardı — ilk teması sen açmalıydın ama girişte fazla erken peek atmış olabilirsin; takımınla aynı anda execute başlat.");
+  t("cyclereal-r3d2 M0-R0: 'peek atmış olabilirsin' → 'peek atmışsın'", /peek atmışsın;/.test(m0) && !/peek attı/.test(m0), `→ "${m0}"`);
+  const v1 = tr("Cypher B veya Garage girişlerine tel/kamera koymuş olabilir, Operator taşıyan Chamber/Astra uzun hattı kontrol ediyor.");
+  t("cyclevariety1 S3: hedge'li Cypher yan-cümlesi DÜŞER, kalan korunur",
+    v1 === "Operator taşıyan Chamber ya da Astra uzun hattı kontrol ediyor.", `→ "${v1}"`);
+  const g = tr("Rakipler açıyı tuttu — bu round A Elbow civarında siper yanında dururken seni o açıdan vurmuş olabilir; aynı açıda üç roundda öldün, o açıyı tekrar gövdene alıp bekleme.");
+  t("cycletr-posters3 skye-g: ölüm çekirdeği (seni … vurmuş) korunur, ad uydurulmaz, hedge kalmaz",
+    /seni o açıdan vurdu;/.test(g) && !/olabilir/.test(g) && !/Jett|Reyna|Cypher/.test(g), `→ "${g}"`);
+  const two = tr("Cypher A Main'e tuzak bırakmış olabilir. A Main'de beklemeden girdin.");
+  t("sentetik: hedge'li düşman CÜMLESİ düşer, oyuncunun olgusu kalır", two === "A Main'de beklemeden girdin.", `→ "${two}"`);
+  const only = "Cypher B/C girişlerine tel ve kamera koymuş olabilir.";
+  const o = tr(only);
+  t("tek içerik hedge'li düşman cümlesi: DÜŞMEZ ama KESİNLEŞMEZ ('koydu' yok)", o === only, `→ "${o}"`);
+  const onlyFn = fnOf("isOnlyHedgedEnemyClaim") as unknown as ((s: string, l: "tr" | "en") => boolean) | undefined;
+  t("isOnlyHedgedEnemyClaim: yalnız hedge'li düşman maddesi → true; karışık → false",
+    onlyFn?.(only, "tr") === true && onlyFn?.("Cypher tel koymuş olabilir, Chamber op tutuyor.", "tr") === false,
+    `→ ${String(onlyFn?.(only, "tr"))}`);
+  // Zincir (prod finalizeVisionFeedback, katil/silah okunmamış): katil + silah uydurulmaz;
+  // EA'da hedge'li madde kanıtlı madde varken düşer.
+  const fg = { ...buildFactGround({ died: true }, {}), playerAgentKnown: true, playerAgent: "Jett" };
+  const fin = finalizeVisionFeedback(
+    { deathAnalysis: "Muhtemelen Jett seni Operator ile vurmuş olabilir.",
+      enemyAnalysis: [only, "Chamber uzun hattı Operator ile tutuyor."],
+      nextRoundSuggestion: "B'ye util'le gir." },
+    { factGround: fg, lang: "tr", map: "haven", agent: "Jett", roundHistory: [] } as never,
+  );
+  t("sentetik 'Muhtemelen Jett seni Operator ile vurmuş olabilir.' → 'Bir düşman seni vurdu.'",
+    fin.deathAnalysis === "Bir düşman seni vurdu.", `→ "${fin.deathAnalysis}"`);
+  t("EA: hedge'li düşman maddesi düştü, kanıtlı madde kaldı",
+    JSON.stringify(fin.enemyAnalysis) === JSON.stringify(["Chamber uzun hattı Operator ile tutuyor."]), `→ ${JSON.stringify(fin.enemyAnalysis)}`);
+  // B35 genişlemesi (tel/kamera/cihaz/taret + "koydu"): çok cümleli metinde kesin kipli
+  // düşman-cihaz iddiası düşer; oyuncunun KENDİ kiti (2. şahıs "koydun") ve "teleport" dokunulmaz.
+  const rc = (s: string) => realityCheck(s, [] as never, { hasEnemyUtil: false } as never, "death", "tr").text;
+  const u1 = rc("Cypher Hookah girişine tel ya da kamera koydu. Hookah'a util'siz girdin.");
+  t("B35: 'Cypher … tel ya da kamera koydu.' cümlesi düşer", u1 === "Hookah'a util'siz girdin.", `→ "${u1}"`);
+  for (const s of [
+    "Cypher olarak kameranı B Main'e erken koydun. Hookah'ta öldün.",
+    "Omen teleport noktasını B Main'e koydu. Hookah'ta öldün.",
+  ]) t(`B35 NEG bayt-aynı: "${s.slice(0, 40)}…"`, rc(s) === s, `→ "${rc(s)}"`);
 }
 
 console.log(`

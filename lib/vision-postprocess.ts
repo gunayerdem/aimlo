@@ -28,6 +28,7 @@ import {
   stripDiagnosisLabel,
   hasCoachContent,
   rewriteKayitVarFacts,
+  isOnlyHedgedEnemyClaim,
 } from "@/lib/coach-text";
 import { enforceAgentKit } from "@/lib/agent-abilities";
 import { knownAgent } from "@/lib/format-display";
@@ -226,7 +227,10 @@ export function finalizeVisionFeedback(
     const src = rewriteKayitVarFacts(fixNames(String(s)));    // FB06 · F95 (bkz. daIn/nrIn)
     const c = realityCheck(src, memory, factGround, "suggestion", lang, map);
     const cleanedChecked = c.text && c.text.trim() ? cleanCoachText(c.text, lang) : "";
-    const proven = hasCoachContent(cleanedChecked);
+    // FB07 · F43: maddenin TAMAMI hedge'li düşman tahmini ("Cypher … tel koymuş olabilir.")
+    // ise kanıtsız sayılır → dizide kanıtlı madde varsa düşer; yoksa son madde (hedge'i
+    // korunmuş, kesinleştirilmemiş hâliyle) kalır.
+    const proven = hasCoachContent(cleanedChecked) && !isOnlyHedgedEnemyClaim(c.text, lang);
     return { proven, text: finish(proven ? cleanedChecked : cleanCoachText(src, lang), VISION_ENEMY_ITEM_CAP, "enemyAnalysis") };
   }).filter((x) => hasCoachContent(x.text));
   const provenItems = eaItems.filter((x) => x.proven);
