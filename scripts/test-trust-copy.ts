@@ -30,6 +30,9 @@
  *       "%NN daha iyi", yorum kartı ve sahte platform istatistiği (landingStats).
  *   [6] F91: ürün yeteneği / beta durumu koda göre — "düşman pozisyon", "kapalı
  *       beta", "sınırlı davetli" yok; landing beta cümlesi FREE_TIER_ENFORCED'a bağlı.
+ *   [7] F49: KVKK/Gizlilik olgusal içerik — veri sorumlusu lib/seller.ts'ten, ekran
+ *       görüntüsü/destek/telemetri kategorileri, Upstash + Vercel Analytics alıcıları,
+ *       "sadece prompt verisi" yok. Hukuki unsurlar kilitlenmez (hukukçu taslağı).
  * RUN: npx tsx scripts/test-trust-copy.ts
  */
 import fs from "node:fs";
@@ -289,6 +292,38 @@ t("app/page.tsx sunucu sarmalayıcısı: 'use client' YOK, FREE_TIER_ENFORCED ==
 t("/guvenlik beta bölümü olgu: herkes kayıt olup indirebilir + geri bildirim kanalı",
   /Herkes kayıt olup uygulamayı/u.test(guv) && /aimlo\.gg\/download/.test(guv) &&
     /Destek ekranından/u.test(guv) && /support@aimlo\.gg/.test(guv));
+
+// [7] F49 (2026-09-24): KVKK/Gizlilik metninde OLGUSAL eksikler — veri sorumlusu
+// "AIMLO platformu" (kişi değil; kimlik lib/seller.ts'te duruyordu), ekran
+// görüntüsünün OpenAI'ye gittiği yazmıyordu (vision/route.ts buildUserContent),
+// Gizlilik "OpenAI (sadece prompt verisi)" diyordu, Upstash (lib/api-auth.ts,
+// lib/auth-rate-limit.ts) ve Vercel Analytics/Speed Insights (app/layout.tsx) alıcı
+// listesinde yoktu. Hukuki unsurlar (md.10 hukuki sebep ve toplama yöntemi, md.9
+// dayanağı, saklama süreleri) KİLİTLENMEZ — hukukçu taslağında
+// (docs/legal/KVKK-HUKUKCU-TASLAGI.md), softi + hukukçu onayı bekliyor.
+console.log("\n[7] F49 — KVKK/Gizlilik olgusal içerik koda göre");
+{
+  const kvkkRaw = read("app/legal/kvkk/page.tsx");
+  const kvkk = jsxText(stripComments(kvkkRaw));
+  t("KVKK: veri sorumlusu lib/seller.ts'ten okunur (import + tradeName/address/taxOffice/taxNumber/email)",
+    /import\s*\{\s*SELLER\s*\}\s*from\s*["']@\/lib\/seller["']/.test(kvkkRaw) &&
+      ["tradeName", "address", "taxOffice", "taxNumber", "email"].every((k) => kvkkRaw.includes(`SELLER.${k}`)));
+  t("KVKK: künye KOPYALANMAMIŞ (VKN / unvan literal olarak sayfada yok)",
+    !kvkkRaw.includes("4271175312") && !/ADİ ORTAKLIĞI/u.test(kvkkRaw));
+  t("KVKK: 'AIMLO platformu … veri sorumlusudur' (kişi olmayan sorumlu) yok", !/AIMLO platformu/u.test(kvkk));
+  t("KVKK: ekran görüntüsü kategorisi — yalnız ölünen round, OpenAI (ABD), AIMLO'da kaydedilmez",
+    /Ekran görüntüsü:/u.test(kvkk) && /öldüğünüz round'da/u.test(kvkk) && /OpenAI'ye \(ABD\)/u.test(kvkk) &&
+      /AIMLO sunucularında kaydedilmez/u.test(kvkk));
+  t("KVKK: destek mesajları + SHA-256 özetli telemetri kategorileri",
+    /Destek mesajları:/u.test(kvkk) && /SHA-256/.test(kvkk));
+  t("KVKK: alıcılarda Upstash + Vercel Analytics/Speed Insights",
+    /Upstash/.test(kvkk) && /Vercel Analytics/.test(kvkk) && /Speed Insights/.test(kvkk));
+  const priv = jsxText(stripComments(read("app/legal/privacy/page.tsx")));
+  t("Gizlilik: 'sadece prompt verisi' YOK", !/sadece prompt verisi/iu.test(priv));
+  t("Gizlilik: OpenAI satırı ekran görüntüsü (yalnız ölünen round) + round verisi + AIMLO saklamaz",
+    /OpenAI \(AI işleme — ekran görüntüsü \(yalnızca ölünen round'da\) \+ round verisi; AIMLO saklamaz\)/u.test(priv));
+  t("Gizlilik: Upstash üçüncü taraf listesinde", /Upstash/.test(priv));
+}
 
 console.log(`\n${fail === 0 ? "✅" : "❌"} test-trust-copy: ${pass} geçti, ${fail} kırık`);
 if (fail > 0) process.exit(1);

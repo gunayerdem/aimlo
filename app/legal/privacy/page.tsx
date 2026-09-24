@@ -20,7 +20,7 @@ export default function PrivacyPage() {
             Gizlilik Politikası
           </h1>
           <p className="text-sm text-neutral-500">
-            Son güncelleme: 7 Mayıs 2026
+            Son güncelleme: 24 Eylül 2026
           </p>
         </header>
 
@@ -29,6 +29,18 @@ export default function PrivacyPage() {
           <ul className="list-disc pl-5 space-y-1">
             <li>Kayıt sırasında: isim, soyisim, kullanıcı adı, e-posta, şifre (hash)</li>
             <li>Oyun analizi: harita, ajan, round sonuçları, ölüm konumları</li>
+            {/* F49 (2026-09-24): kodda işlenen ama metinde olmayan üç kalem.
+                Ekran görüntüsü yalnız died !== false iken OpenAI'ye gider
+                (vision/route.ts buildUserContent) ve hiçbir yere yazılmaz. */}
+            <li>
+              Ekran görüntüsü (yalnızca ölünen round&apos;da): anlık AI analizi
+              için OpenAI&apos;ye gönderilir; AIMLO sunucularında saklanmaz
+            </li>
+            <li>Destek mesajları: mesaj metni ve hesabın e-posta adresi</li>
+            <li>
+              Teknik telemetri: süre ve hata ölçümleri; kullanıcı kimliği
+              SHA-256 ile özetlenir
+            </li>
             <li>Oturum: IP adresi, tarayıcı, çerez bilgisi</li>
           </ul>
         </section>
@@ -45,10 +57,23 @@ export default function PrivacyPage() {
         <section className="space-y-3 text-sm leading-relaxed text-neutral-300">
           <h2 className="text-lg font-bold text-white">Üçüncü Taraflar</h2>
           <ul className="list-disc pl-5 space-y-1">
-            <li>Vercel (barındırma) — bkz. vercel.com/legal/privacy-policy</li>
+            <li>
+              Vercel (barındırma + Analytics/Speed Insights: sayfa görüntüleme ve
+              performans ölçümü) — bkz. vercel.com/legal/privacy-policy
+            </li>
             <li>Supabase (veritabanı + auth) — bkz. supabase.com/privacy</li>
             <li>Resend (e-posta iletimi) — bkz. resend.com/legal/privacy-policy</li>
-            <li>OpenAI (AI işleme — sadece prompt verisi) — bkz. openai.com/policies/privacy-policy</li>
+            <li>
+              Upstash (hız sınırı sayaçları: IP adresi, e-posta adresi ve
+              kullanıcı kimliği tabanlı anahtarlar) — bkz. upstash.com
+            </li>
+            {/* F49 (2026-09-24): "sadece prompt verisi" yanlıştı — ölünen
+                round'da ekran görüntüsü de gidiyor (vision/route.ts:212-219). */}
+            <li>
+              OpenAI (AI işleme — ekran görüntüsü (yalnızca ölünen round&apos;da)
+              + round verisi; AIMLO saklamaz) — bkz.
+              openai.com/policies/privacy-policy
+            </li>
           </ul>
         </section>
 
